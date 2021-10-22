@@ -1,0 +1,9 @@
+@import 'variables/variables.scss';
+body {
+    font-family: $generalFont;
+    background-color: #f6f9fc;
+    transition: 0.2s all linear;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}

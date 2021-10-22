@@ -1,0 +1,13 @@
+.logoContainer {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #152027;
+  .logoIcon {
+    font-size: 3em;
+  }
+  .logoTitle {
+    font-size: 2em;
+    margin: 0;
+  }
+}

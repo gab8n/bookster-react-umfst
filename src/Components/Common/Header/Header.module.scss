@@ -1,0 +1,25 @@
+.headerContainer {
+  height: 26vw;
+  width: 100vw;
+  background-color: #0dd6b8;
+  position: relative;
+  .headerTitle {
+    font-weight: normal;
+    font-size: 3vw;
+    position: absolute;
+    left: 5%;
+    bottom: 25%;
+  }
+  .borrowNowButton {
+    position: absolute;
+    left: 5%;
+    bottom: 10%;
+  }
+
+  .headerLogoStyle {
+    position: absolute;
+    right: 10%;
+    bottom: -15%;
+    height: 23vw;
+  }
+}
