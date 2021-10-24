@@ -1,31 +1,32 @@
-.navbarContainer{
-    width: 100%;
-    padding: 10px;
-    color:#152027;
+.navbarContainer {
+  width: 100%;
+  padding: 10px 0;
+  color: #152027;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //   background-color: bisque;
+  .menuContainer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    .menuContainer{
-        display: flex;
-        align-items: center;
-        .menuButton{
-            font-size: 1.5em;
-            text-decoration: none;
-            color: #152027;
-            margin-right: 2rem;
-            height: min-content;
-            &:hover{
-                color: white;
-            }
-        }
-        .loginButton{
-            background-color: transparent;
-            border-color: white;
-            border-style: solid;
-            border-width: 3.5px;
-            padding: 0.2em 0.4em;
-            border-radius: 13px;
-            cursor: pointer;
-        }
+    .menuButton {
+      font-size: 1.5em;
+      text-decoration: none;
+      color: #152027;
+      margin-right: 2rem;
+      height: min-content;
+      &:hover {
+        color: white;
+      }
     }
+    .loginButton {
+      background-color: transparent;
+      border-color: white;
+      border-style: solid;
+      border-width: 3.5px;
+      padding: 0.2em 0.4em;
+      border-radius: 13px;
+      cursor: pointer;
+    }
+  }
 }
