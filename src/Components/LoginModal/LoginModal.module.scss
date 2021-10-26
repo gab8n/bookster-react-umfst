@@ -1,0 +1,54 @@
+.modalContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  .modalForm {
+    width: 90%;
+    // background-color: blue;
+    display: flex;
+    flex-direction: column;
+    * {
+      margin-bottom: 5%;
+    }
+    margin-bottom: 4%;
+  }
+  .loginGoogleAuth {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 55%;
+    height: 60px;
+    margin: 0;
+    background-color: white;
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 2vh;
+    &:hover {
+      cursor: pointer;
+    }
+    .googleIconStyle {
+      height: 40%;
+      width: 20%;
+      margin: 0;
+    }
+    .googleAuthText {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+      height: 100%;
+      background-color: #4285f4;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      margin: 0;
+    }
+    margin-bottom: 5%;
+  }
+  .paragraph {
+    cursor: pointer;
+    font-size: 0.8em;
+    margin: 0;
+    margin-bottom: 4%;
+  }
+}

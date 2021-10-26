@@ -1,0 +1,7 @@
+@import 'lib/variables.scss';
+
+@mixin shadowMixin($shadowStyle) {
+  -webkit-box-shadow: $shadowStyle;
+  -moz-box-shadow: $shadowStyle;
+  box-shadow: $shadowStyle;
+}

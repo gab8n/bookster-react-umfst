@@ -1,0 +1,17 @@
+@import 'lib/mixins.scss';
+
+.inputStyle {
+  padding: 1.3em 1.5em;
+  border-radius: 13px;
+  border: none;
+  @include shadowMixin($shadowForInput);
+
+  font-size: 1em;
+  font-weight: bold;
+  outline: none;
+  &:focus {
+    outline-color: rgba(0, 0, 0, 0.158);
+    outline-style: solid;
+    outline-width: 1.5px;
+  }
+}

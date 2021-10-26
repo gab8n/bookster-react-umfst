@@ -45,7 +45,7 @@ const CustomModal = ({ modalButton, modalContent }) => {
         overlayClassName={overlayStyle}
       >
         <div className={modalHeader}>
-          <h3 className={modalTitle}>LogIn</h3>
+          <h3 className={modalTitle}>Log In</h3>
           <Button
             label="&#10006;"
             className={modalCloseButton}
