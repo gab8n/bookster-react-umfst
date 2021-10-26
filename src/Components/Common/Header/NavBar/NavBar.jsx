@@ -46,9 +46,9 @@ const NavBar = () => {
             modalType === 'login' ? (
               <LoginModal {...{ toggleRegister, toggleResetPassword }} />
             ) : modalType === 'register' ? (
-              <RegisterModal />
+              <RegisterModal {...{ toggleLogin }} />
             ) : (
-              <ResetPasswordModal />
+              <ResetPasswordModal {...{ toggleLogin }} />
             )
           }
         />

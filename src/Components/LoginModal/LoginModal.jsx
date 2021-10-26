@@ -54,11 +54,11 @@ const LoginModal = ({ toggleRegister, toggleResetPassword }) => {
           <img src={googleIcon} alt="google icon" className={googleIconStyle} />
           <div className={googleAuthText}>Sign In with Google</div>
         </div>
-        <p className={paragraph} onClick={toggleRegister}>
+        <p className={paragraph} onClick={toggleResetPassword}>
           Forgot your password?
         </p>
 
-        <p className={paragraph} onClick={toggleResetPassword}>
+        <p className={paragraph} onClick={toggleRegister}>
           New user ? Create an account
         </p>
       </div>

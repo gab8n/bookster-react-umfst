@@ -1,17 +1,7 @@
-import { useEffect } from 'react';
 import Home from './Components/Home/Home';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import { createUserWithEmailAndPassword } from 'Services/firebase';
-
 function App() {
-  useEffect(() => {
-    createUserWithEmailAndPassword(
-      'cotocvasilegabriel@yahoo.com',
-      '123456789',
-      'gab8n'
-    );
-  }, []);
   return (
     <Router>
       <Switch>
