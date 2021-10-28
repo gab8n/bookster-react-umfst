@@ -6,19 +6,43 @@ import {
   signInWithGoogle,
 } from 'Services/firebase';
 import googleIcon from 'assets/google-icon.svg';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { setUserData } from 'Redux/Ducks/authStore';
+import { useDispatch } from 'react-redux';
 
 import styles from 'Components/LoginModal/LoginModal.module.scss';
 
-const LoginModal = ({ toggleRegister, toggleResetPassword }) => {
+const LoginModal = ({ toggleRegister, toggleResetPassword, toggleModal }) => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+
+  const dispatch = useDispatch();
 
   const handleGoogleLogin = () => {
     signInWithGoogle();
   };
+
+  const handleLoginError = (error) => {
+    toast.error(error);
+    setCredentials({ email: '', password: '' });
+  };
+
+  const handleLoginSuccess = (data) => {
+    toast.success('Succesfull Log In');
+    dispatch(setUserData(data));
+    toggleModal();
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(credentials.email, credentials.password);
+    signInWithEmailAndPassword(
+      credentials.email,
+      credentials.password,
+      handleLoginSuccess,
+      handleLoginError
+    );
   };
+
   const {
     modalContent,
     modalForm,
@@ -39,6 +63,7 @@ const LoginModal = ({ toggleRegister, toggleResetPassword }) => {
             onChange={(e) =>
               setCredentials({ ...credentials, email: e.target.value })
             }
+            value={credentials.email}
           />
           <Input
             type="password"
@@ -47,6 +72,7 @@ const LoginModal = ({ toggleRegister, toggleResetPassword }) => {
             onChange={(e) =>
               setCredentials({ ...credentials, password: e.target.value })
             }
+            value={credentials.password}
           />
           <Button type="submit" label="Login" className={submitButton} />
         </form>

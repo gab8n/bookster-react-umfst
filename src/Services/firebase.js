@@ -14,14 +14,19 @@ firebase.initializeApp({
 export const auth = firebase.auth();
 export const database = firebase.firestore();
 
-export const signInWithEmailAndPassword = (email, password) => {
+export const signInWithEmailAndPassword = (
+  email,
+  password,
+  handleLoginSuccess,
+  handleLoginError
+) => {
   auth
     .signInWithEmailAndPassword(email, password)
     .then((currentUser) => {
-      console.log(currentUser);
+      handleLoginSuccess(currentUser);
     })
     .catch((error) => {
-      console.log(error.message);
+      handleLoginError(error.message);
       console.log(error);
     });
 };

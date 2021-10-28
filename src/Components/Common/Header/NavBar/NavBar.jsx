@@ -37,7 +37,6 @@ const NavBar = () => {
         <Link to="/contact" className={menuButton}>
           Contact
         </Link>
-        {/* <Button label="Login" className={`${loginButton} ${menuButton}`} /> */}
         <CustomModal
           modalButton={
             <Button label="Login" className={`${loginButton} ${menuButton}`} />
