@@ -24,7 +24,6 @@ const NavBar = () => {
   };
 
   const userData = useSelector((state) => state.authStore);
-  console.log(userData);
   return (
     <nav className={navbarContainer}>
       <Logo />
