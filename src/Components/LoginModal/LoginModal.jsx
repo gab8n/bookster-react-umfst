@@ -7,7 +7,6 @@ import {
 } from 'Services/firebase';
 import googleIcon from 'assets/google-icon.svg';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { setUserData } from 'Redux/Ducks/authStore';
 import { useDispatch } from 'react-redux';
 
@@ -18,16 +17,12 @@ const LoginModal = ({ toggleRegister, toggleResetPassword, toggleModal }) => {
 
   const dispatch = useDispatch();
 
-  const handleGoogleLogin = () => {
-    signInWithGoogle();
-  };
-
-  const handleLoginError = (error) => {
+  const handleError = (error) => {
     toast.error(error);
     setCredentials({ email: '', password: '' });
   };
 
-  const handleLoginSuccess = (data) => {
+  const handleSuccess = (data) => {
     toast.success('Succesfull Log In');
     dispatch(setUserData(data));
     toggleModal();
@@ -38,9 +33,12 @@ const LoginModal = ({ toggleRegister, toggleResetPassword, toggleModal }) => {
     signInWithEmailAndPassword(
       credentials.email,
       credentials.password,
-      handleLoginSuccess,
-      handleLoginError
+      handleSuccess,
+      handleError
     );
+  };
+  const handleGoogleLogin = () => {
+    signInWithGoogle(handleSuccess, handleError);
   };
 
   const {

@@ -12,7 +12,7 @@ const Header = ({ headerLogo }) => {
         THE BEST SITE FOR <br /> BORROWING BOOKS
       </h2>
       <div className={borrowNowButton}>
-        <Button label="Borrow Now" />
+        <Button label="Borrow Now" onClick={() => console.log('veba')} />
       </div>
       <img src={headerLogo} className={headerLogoStyle} alt="Header Logo" />
     </header>

@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import Button from 'Components/Common/Button/Button';
 import CustomModal from 'Components/Common/CustomModal/CustomModal';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import LoginModal from 'Components/LoginModal/LoginModal';
 import RegisterModal from 'Components/RegisterModal/RegisterModal';
 import ResetPasswordModal from 'Components/ResetPasswordModal/ResetPasswordModal';
+import UserIcon from 'Components/Common/Header/NavBar/UserIcon/UserIcon';
 
 const NavBar = () => {
   const { navbarContainer, menuContainer, menuButton, loginButton } = styles;
@@ -21,6 +23,8 @@ const NavBar = () => {
     setModalType('reset');
   };
 
+  const userData = useSelector((state) => state.authStore);
+  console.log(userData);
   return (
     <nav className={navbarContainer}>
       <Logo />
@@ -37,20 +41,27 @@ const NavBar = () => {
         <Link to="/contact" className={menuButton}>
           Contact
         </Link>
-        <CustomModal
-          modalButton={
-            <Button label="Login" className={`${loginButton} ${menuButton}`} />
-          }
-          modalContent={
-            modalType === 'login' ? (
-              <LoginModal {...{ toggleRegister, toggleResetPassword }} />
-            ) : modalType === 'register' ? (
-              <RegisterModal {...{ toggleLogin }} />
-            ) : (
-              <ResetPasswordModal {...{ toggleLogin }} />
-            )
-          }
-        />
+        {userData.loggedIn ? (
+          <UserIcon />
+        ) : (
+          <CustomModal
+            modalButton={
+              <Button
+                label="Login"
+                className={`${loginButton} ${menuButton}`}
+              />
+            }
+            modalContent={
+              modalType === 'login' ? (
+                <LoginModal {...{ toggleRegister, toggleResetPassword }} />
+              ) : modalType === 'register' ? (
+                <RegisterModal {...{ toggleLogin }} />
+              ) : (
+                <ResetPasswordModal {...{ toggleLogin }} />
+              )
+            }
+          />
+        )}
       </div>
     </nav>
   );

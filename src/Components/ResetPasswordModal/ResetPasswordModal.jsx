@@ -1,14 +1,27 @@
 import { useState } from 'react';
 import Button from 'Components/Common/Button/Button';
 import Input from 'Components/Common/Input/Input';
+import { toast } from 'react-toastify';
+import { sendPasswordResetEmail } from 'Services/firebase';
 
 import styles from 'Components/ResetPasswordModal/ResetPasswordModal.module.scss';
 
-const ResetPasswordModal = ({ toggleLogin }) => {
+const ResetPasswordModal = ({ toggleLogin, toggleModal }) => {
   const [email, setEmail] = useState('');
+
+  const handleError = (error) => {
+    toast.error(error);
+    setEmail('');
+  };
+
+  const handleSuccess = () => {
+    toast.success('Password sent with success');
+    toggleLogin();
+  };
 
   const handleResetPassword = (e) => {
     e.preventDefault();
+    sendPasswordResetEmail(email, handleSuccess, handleError);
   };
 
   const { modalContent, modalForm, submitButton, paragraph } = styles;
@@ -22,6 +35,7 @@ const ResetPasswordModal = ({ toggleLogin }) => {
             name="Email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
           <Button
             type="submit"

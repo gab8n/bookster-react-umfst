@@ -2,8 +2,6 @@ import Home from './Components/Home/Home';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 function App() {
-  const state = useSelector((state) => state.authStore);
-  console.log(state);
   return (
     <Router>
       <Switch>
