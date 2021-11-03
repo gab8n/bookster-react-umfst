@@ -2,7 +2,7 @@ import styles from 'Components/Common/Header/NavBar/UserIcon/UserIcon.module.scs
 import userAvatar from 'assets/userAvatar.svg';
 import { useState } from 'react';
 import Button from 'Components/Common/Button/Button';
-import { signOut } from 'Services/firebase';
+import { signOut } from 'Services/firebaseAuth';
 import { useDispatch } from 'react-redux';
 import { logout } from 'Redux/Ducks/authStore';
 import { toast } from 'react-toastify';

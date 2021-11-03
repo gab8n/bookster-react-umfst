@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from 'Components/Common/Input/Input';
 import Button from 'Components/Common/Button/Button';
-import { createUserWithEmailAndPassword } from 'Services/firebase';
+import { createUserWithEmailAndPassword } from 'Services/firebaseAuth';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { setUserData } from 'Redux/Ducks/authStore';

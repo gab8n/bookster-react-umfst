@@ -4,7 +4,7 @@ import Button from 'Components/Common/Button/Button';
 import {
   signInWithEmailAndPassword,
   signInWithGoogle,
-} from 'Services/firebase';
+} from 'Services/firebaseAuth';
 import googleIcon from 'assets/google-icon.svg';
 import { toast } from 'react-toastify';
 import { setUserData } from 'Redux/Ducks/authStore';

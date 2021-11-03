@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from 'Components/Common/Button/Button';
 import Input from 'Components/Common/Input/Input';
 import { toast } from 'react-toastify';
-import { sendPasswordResetEmail } from 'Services/firebase';
+import { sendPasswordResetEmail } from 'Services/firebaseAuth';
 
 import styles from 'Components/ResetPasswordModal/ResetPasswordModal.module.scss';
 
