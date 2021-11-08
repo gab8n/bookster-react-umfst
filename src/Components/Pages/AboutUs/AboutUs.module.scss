@@ -1,0 +1,21 @@
+.aboutUsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .subheader {
+    height: 150vh;
+    width: 100%;
+    background: rgb(82, 200, 181);
+    background: linear-gradient(
+      0deg,
+      rgba(82, 200, 181, 1) 0%,
+      rgba(149, 138, 218, 1) 100%
+    );
+    margin-bottom: 20vh;
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+    border-bottom: 20px solid #2f4858;
+    display: flex;
+    padding-top: 7%;
+  }
+}

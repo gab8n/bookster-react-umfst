@@ -5,7 +5,6 @@ import Button from 'Components/Common/Button/Button';
 const Header = ({ headerLogo, title, navBarOnly }) => {
   const { headerContainer, headerLogoStyle, headerTitle, borrowNowButton } =
     styles;
-  console.log(navBarOnly);
   return navBarOnly ? (
     <NavBar />
   ) : (
