@@ -1,0 +1,13 @@
+.cardContainer {
+  //   height: 25vw;
+  width: 20%;
+  background-color: blueviolet;
+  border-radius: 13px;
+  .thumbnailStyle {
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+
+    width: 100%;
+  }
+  margin-bottom: 50px;
+}

@@ -1,47 +1,46 @@
 import Header from 'Components/Common/Header/Header';
 import { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
-import PaginationBar from './PaginationBar/PaginationBar';
+import { getBooks } from 'Services/firebaseBooks';
+import styles from './Collection.module.scss';
+import BookCard from './BookCard/BookCard';
 
-const items = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24,
-];
-
-function Items({ currentItems }) {
-  return (
-    <div className="items">
-      {currentItems &&
-        currentItems.map((item) => (
-          <div>
-            <h3>Item #{item}</h3>
-          </div>
-        ))}
-    </div>
-  );
-}
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import CollectionFilters from './CollectionFilters/CollectionFilters';
 
 const Collection = () => {
-  const [currentItems, setCurrentItems] = useState(null);
-  const [pageCount, setPageCount] = useState(0);
-  const [pageNumber, setPageNumber] = useState(0);
-  const itemsPerPage = 6;
+  const [booksList, setBooksList] = useState([]);
+  const itemsPerPage = 20;
+
+  const { itemsContainer, pageContainer, contentContainer } = styles;
 
   useEffect(() => {
-    const startOffset = (pageNumber * itemsPerPage) % items.length;
-    const endOffset = startOffset + itemsPerPage;
+    getBooks(itemsPerPage, booksList[itemsPerPage], setBooksList);
+  }, [itemsPerPage]);
 
-    setCurrentItems(items.slice(startOffset, endOffset));
+  const handleScroll = () => {
+    getBooks(itemsPerPage, booksList[booksList.length - 1], setBooksList);
+  };
 
-    setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [pageNumber, itemsPerPage]);
+  const containerRef = useBottomScrollListener(handleScroll);
 
   return (
-    <>
+    <div className={pageContainer}>
       <Header title={'COLLECTION'} navBarOnly={true} />
-      <Items currentItems={currentItems} />
-      <PaginationBar {...{ pageCount, setPageNumber }} />
-    </>
+      <div className={contentContainer}>
+        <CollectionFilters />
+        <div className={itemsContainer} ref={containerRef}>
+          {booksList.map((element) => {
+            return (
+              <BookCard
+                thumbnail={element.data().thumbnail}
+                title={element.data().title}
+                author={element.data().authors[0]}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };
 

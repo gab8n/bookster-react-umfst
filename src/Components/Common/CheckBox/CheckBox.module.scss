@@ -1,0 +1,26 @@
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+}
+.checkBoxLabel {
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  margin: 0.7em 1em;
+}
+.checkbox {
+  appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid #000;
+  background-clip: content-box;
+  padding: 3px;
+  border-radius: 2px;
+  cursor: pointer;
+  &:checked {
+    background-color: #a296f0;
+  }
+}

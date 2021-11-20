@@ -1,0 +1,27 @@
+.multiSelectContainer {
+  padding: 5%;
+
+  .multiSelectHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .multiSelectTitle {
+      font-size: 1.5em;
+      margin: 0;
+      margin-bottom: 10px;
+    }
+    .expandIcon {
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+    border-bottom: solid rgba(0, 0, 0, 0.253) 1px;
+  }
+  .multiSelectorOptionsContainer {
+    overflow: hidden;
+    height: 250px;
+    transition: height 250ms;
+  }
+}
+.noHeight {
+  height: 0px !important;
+}
