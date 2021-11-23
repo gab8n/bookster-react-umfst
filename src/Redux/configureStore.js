@@ -1,9 +1,11 @@
 import { createStore, combineReducers } from 'redux';
 
 import authStore from 'Redux/Ducks/authStore';
+import bookCollectionFilters from 'Redux/Ducks/bookCollectionFilters';
 
 const reducer = combineReducers({
   authStore,
+  bookCollectionFilters,
 });
 
 const configureStore = (initialState) =>

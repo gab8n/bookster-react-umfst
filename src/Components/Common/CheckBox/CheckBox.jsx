@@ -1,6 +1,6 @@
 import styles from './CheckBox.module.scss';
 
-const CheckBox = ({ name, onChange, isChecked, label }) => {
+const CheckBox = ({ name, onChange, isChecked, label, disabled }) => {
   const { checkboxContainer, checkbox, checkBoxLabel } = styles;
   return (
     <div className={checkboxContainer}>
@@ -11,6 +11,7 @@ const CheckBox = ({ name, onChange, isChecked, label }) => {
         value={name}
         checked={isChecked}
         onChange={onChange}
+        // disabled={disabled}
       />
       <p onClick={onChange} className={checkBoxLabel}>
         {label}
