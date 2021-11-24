@@ -23,19 +23,19 @@ export const getBooks = (
   setBooksList,
   filters
 ) => {
-  const { genresFilter, authorsFilter, publishersFilter } = filters;
+  const { genres, authors, publisher } = filters;
 
   let bookCollection = database.collection('books');
   bookCollection =
-    genresFilter.length !== 0
-      ? bookCollection.where('genres', 'array-contains-any', genresFilter)
+    genres.length !== 0
+      ? bookCollection.where('genres', 'array-contains-any', genres)
       : bookCollection;
   bookCollection =
-    authorsFilter.length !== 0
-      ? bookCollection.where('authors', 'array-contains-any', authorsFilter)
+    authors.length !== 0
+      ? bookCollection.where('authors', 'array-contains-any', authors)
       : bookCollection;
-  bookCollection = publishersFilter.length
-    ? bookCollection.where('publisher', 'in', publishersFilter)
+  bookCollection = publisher.length
+    ? bookCollection.where('publisher', 'in', publisher)
     : bookCollection;
   bookCollection = lastVisibleDocument
     ? bookCollection

@@ -3,27 +3,25 @@ import { useState, useEffect } from 'react';
 import { getBooks } from 'Services/firebaseBooks';
 import styles from './Collection.module.scss';
 import BookCard from './BookCard/BookCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CollectionFilters from './CollectionFilters/CollectionFilters';
 
 const Collection = () => {
   const [booksList, setBooksList] = useState([]);
-  const [genresFilter, setGenresFilter] = useState([]);
-  const [authorsFilter, setAuthorsFilter] = useState([]);
-  const [publishersFilter, setPublishersFilter] = useState([]);
 
-  const dispatch = useDispatch();
+  const filters = useSelector(
+    (state) => state.bookCollectionFilters.currentFilters
+  );
 
   const itemsPerPage = 20;
-  const filters = { genresFilter, authorsFilter, publishersFilter };
   const { itemsContainer, pageContainer, contentContainer } = styles;
 
   useEffect(() => {
     setBooksList([]);
     getBooks(itemsPerPage, booksList[itemsPerPage], setBooksList, filters);
-  }, [itemsPerPage, genresFilter, authorsFilter, publishersFilter]);
+  }, [itemsPerPage, filters]);
 
   const handleScroll = () => {
     getBooks(
@@ -40,9 +38,7 @@ const Collection = () => {
     <div className={pageContainer}>
       <Header title={'COLLECTION'} navBarOnly={true} />
       <div className={contentContainer}>
-        <CollectionFilters
-          {...{ setGenresFilter, setAuthorsFilter, setPublishersFilter }}
-        />
+        <CollectionFilters />
         <div className={itemsContainer} ref={containerRef}>
           {booksList.map((element) => {
             return (

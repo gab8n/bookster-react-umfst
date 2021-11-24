@@ -12,8 +12,8 @@ const BookCard = ({ title, author, rating, thumbnail }) => {
   return (
     <div className={cardContainer}>
       <img src={thumbnail} className={thumbnailStyle} />
-      <h3 class={titleContainer}>{title}</h3>
-      <p class={authorContainer}>{author}</p>
+      <h3 className={titleContainer}>{title}</h3>
+      <p className={authorContainer}>{author}</p>
       <div className={ratingContainer}>
         <HiStar />
         <HiStar />

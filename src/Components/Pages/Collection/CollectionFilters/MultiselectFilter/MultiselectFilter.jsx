@@ -3,13 +3,18 @@ import { useState, useEffect } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import styles from './MultiselectFilter.module.scss';
+// import { setOptions, setFilters } from 'Redux/Ducks/bookCollectionFilters';
 
 const MultiselectFilter = ({ title, options, onChange }) => {
   // console.log(options);
-  const [checkedState, setCheckedState] = useState(
-    new Array(options.length).fill(false)
-  );
+  // const [checkedState, setCheckedState] = useState(
+  //   new Array(options.length).fill(false)
+  // );
   // console.log(checkedState);
+
+  // dispatch(setFilters(1, 'GENRE'));
+  // dispatch(setFilters(2, 'GENRE'));
+  // dispatch(setFilters(3, 'GENRE'));
 
   const [isExpanded, setIsExpanded] = useState(true);
 
@@ -17,19 +22,18 @@ const MultiselectFilter = ({ title, options, onChange }) => {
     setIsExpanded(!isExpanded);
   };
 
-  useEffect(() => {
-    const filters = options.filter(
-      (element, index) => checkedState[index] === true
-    );
-    console.log('nu merge');
-    onChange(filters);
-  }, [checkedState]);
+  // useEffect(() => {
+  //   // const filters = options.filter(
+  //   //   (element, index) => checkedState[index] === true
+  //   // );
+  // }, [checkedState]);
 
   const handleOnChange = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-    setCheckedState(updatedCheckedState);
+    // const updatedCheckedState = checkedState.map((item, index) =>
+    //   index === position ? !item : item
+    // );
+    // setCheckedState(updatedCheckedState);
+    onChange(position);
   };
 
   const {
@@ -71,10 +75,8 @@ const MultiselectFilter = ({ title, options, onChange }) => {
             return (
               <CheckBox
                 name={element.option}
-                onChange={() => {
-                  handleOnChange(index);
-                }}
-                isChecked={checkedState[index]}
+                onChange={() => onChange(index)}
+                isChecked={options[index].value}
                 label={element.option}
               />
             );
