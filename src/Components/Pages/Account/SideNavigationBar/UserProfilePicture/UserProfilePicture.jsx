@@ -1,9 +1,10 @@
 import styles from './UserProfilePicture.module.scss';
 
-const UserProfilePicture = () => {
+const UserProfilePicture = ({ photoURL }) => {
   const { container } = styles;
 
-  return <div className={container}></div>;
+  photoURL = photoURL?.replace('=s96-c', '=s400-c');
+  return <img className={container} src={photoURL} alt="user profile" />;
 };
 
 export default UserProfilePicture;
