@@ -5,15 +5,8 @@ import Account from 'Components/Pages/Account/Account';
 import Faq from 'Components/Pages/Faq/Faq';
 import Contact from 'Components/Pages/Contact/Contact';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-// import { getBooksAll } from 'Services/firebaseBooks';
 
 function App() {
-  useEffect(() => {
-    // addBookToCollection(bookData, handleSuccess, handleError);
-    // getBooksAll();
-    // getBooks(1, 20);
-  }, []);
   return (
     <Router>
       <Switch>

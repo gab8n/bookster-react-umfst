@@ -9,6 +9,8 @@ const CURRENTGENRE = 'bookster-react-umfst/filters/currentGenre';
 const CURRENTAUTHOR = 'bookster-react-umfst/filters/currentAuthor';
 const CURRENTPUBLISHER = 'bookster-react-umfst/filters/currentPublisher';
 
+const DEFAULT = 'bookster-react-umfst/filters/default';
+
 const initialState = {
   options: {
     genres: [],
@@ -133,6 +135,8 @@ export default function reducer(state = initialState, action) {
           },
         },
       });
+    case DEFAULT:
+      return initialState;
     default:
       return state;
   }
@@ -157,5 +161,11 @@ export const setFilters = (id, type) => {
         ? CURRENTGENRE
         : CURRENTPUBLISHER,
     payload: id,
+  };
+};
+
+export const clearFilters = () => {
+  return {
+    type: DEFAULT,
   };
 };

@@ -7,16 +7,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CollectionFilters from './CollectionFilters/CollectionFilters';
+import { clearFilters } from 'Redux/Ducks/bookCollectionFilters';
 
 const Collection = () => {
   const [booksList, setBooksList] = useState([]);
-
+  const dispatch = useDispatch();
   const filters = useSelector(
     (state) => state.bookCollectionFilters.currentFilters
   );
 
   const itemsPerPage = 20;
   const { itemsContainer, pageContainer, contentContainer } = styles;
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearFilters());
+    };
+  }, []);
 
   useEffect(() => {
     setBooksList([]);

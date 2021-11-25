@@ -6,6 +6,7 @@ import { signOut } from 'Services/firebaseAuth';
 import { useDispatch } from 'react-redux';
 import { logout } from 'Redux/Ducks/authStore';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const UserIcon = () => {
   const dispatch = useDispatch();
@@ -47,13 +48,9 @@ const UserIcon = () => {
             !isVisible ? userIconDropdown : `${userIconDropdown} ${visible}`
           }
         >
-          <Button
-            label="Logout"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className={dropdownButton}
-          />
+          <Link to="/account" onClick={(e) => {}}>
+            <Button label="Account" className={dropdownButton} />
+          </Link>
           <Button
             label="Messages"
             onClick={(e) => {
@@ -65,6 +62,7 @@ const UserIcon = () => {
             label="Logout"
             onClick={(e) => {
               e.stopPropagation();
+              console.log('logout');
               signOut(handleSuccess, handleError);
             }}
             className={dropdownButton}

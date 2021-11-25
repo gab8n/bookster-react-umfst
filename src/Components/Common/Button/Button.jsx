@@ -4,7 +4,7 @@ const Button = ({ className, label, type, onClick }) => {
   const { buttonStyle } = styles;
   return (
     <button
-      onClick={(e) => onClick(e)}
+      onClick={(e) => onClick && onClick(e)}
       className={className ? className : buttonStyle}
       type={type && type}
     >
