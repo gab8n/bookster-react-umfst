@@ -137,6 +137,7 @@ export default function reducer(state = initialState, action) {
       });
     case DEFAULT:
       return initialState;
+
     default:
       return state;
   }
@@ -163,7 +164,6 @@ export const setFilters = (id, type) => {
     payload: id,
   };
 };
-
 export const clearFilters = () => {
   return {
     type: DEFAULT,

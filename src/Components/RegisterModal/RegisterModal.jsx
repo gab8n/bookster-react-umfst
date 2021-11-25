@@ -21,9 +21,9 @@ const RegisterModal = ({ toggleLogin, toggleModal }) => {
     setCredentials({ ...credentials, email: '', password: '' });
   };
 
-  const handleSuccess = (data) => {
+  const handleSuccess = (userData) => {
     toast.success('Succesfull Register');
-    dispatch(setUserData(data));
+    dispatch(setUserData(userData));
     toggleModal();
   };
 
@@ -33,7 +33,7 @@ const RegisterModal = ({ toggleLogin, toggleModal }) => {
       credentials.username,
       credentials.email,
       credentials.password,
-      handleSuccess,
+      (data) => handleSuccess(data),
       handleError
     );
   };

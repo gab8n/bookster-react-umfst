@@ -3,23 +3,16 @@ import userAvatar from 'assets/userAvatar.svg';
 import { useState } from 'react';
 import Button from 'Components/Common/Button/Button';
 import { signOut } from 'Services/firebaseAuth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'Redux/Ducks/authStore';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 const UserIcon = () => {
   const dispatch = useDispatch();
-  const {
-    userIconStyle,
-    userIconContainer,
-    userIconDropdown,
-    dropdownButton,
-    visible,
-    outlined,
-  } = styles;
-
-  const [isVisible, setIsVisible] = useState(false);
+  const userProfilePicture = useSelector(
+    (state) => state.authStore.userData.photoURL
+  );
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -31,6 +24,16 @@ const UserIcon = () => {
   const handleError = (error) => {
     toast.error(error);
   };
+  const {
+    userIconStyle,
+    userIconContainer,
+    userIconDropdown,
+    dropdownButton,
+    visible,
+    outlined,
+  } = styles;
+
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <>
@@ -42,7 +45,11 @@ const UserIcon = () => {
           toggleVisibility();
         }}
       >
-        <img src={userAvatar} className={userIconStyle} alt="user icon" />
+        <img
+          src={userProfilePicture ? userProfilePicture : userAvatar}
+          className={userIconStyle}
+          alt="user icon"
+        />
         <div
           className={
             !isVisible ? userIconDropdown : `${userIconDropdown} ${visible}`

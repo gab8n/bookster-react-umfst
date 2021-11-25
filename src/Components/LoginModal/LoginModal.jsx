@@ -24,7 +24,6 @@ const LoginModal = ({ toggleRegister, toggleResetPassword, toggleModal }) => {
 
   const handleSuccess = (data) => {
     toast.success('Succesfull Log In');
-    dispatch(setUserData(data));
     toggleModal();
   };
 
@@ -38,7 +37,9 @@ const LoginModal = ({ toggleRegister, toggleResetPassword, toggleModal }) => {
     );
   };
   const handleGoogleLogin = () => {
-    signInWithGoogle(handleSuccess, handleError);
+    signInWithGoogle(handleSuccess, handleError, (data) => {
+      dispatch(setUserData(data));
+    });
   };
 
   const {

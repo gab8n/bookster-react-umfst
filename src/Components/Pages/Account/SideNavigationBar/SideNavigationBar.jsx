@@ -1,11 +1,11 @@
 import styles from './SideNavigationBar.module.scss';
 import UserProfilePicture from './UserProfilePicture/UserProfilePicture';
 
-const SideNavigationBar = () => {
+const SideNavigationBar = ({ photoURL }) => {
   const { container } = styles;
   return (
     <div className={container}>
-      <UserProfilePicture />
+      <UserProfilePicture {...{ photoURL }} />
     </div>
   );
 };
