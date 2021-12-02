@@ -17,7 +17,12 @@ const Collection = () => {
   );
 
   const itemsPerPage = 20;
-  const { itemsContainer, pageContainer, contentContainer } = styles;
+  const {
+    itemsContainer,
+    pageContainer,
+    contentContainer,
+    collectionContainer,
+  } = styles;
 
   useEffect(() => {
     return () => {
@@ -46,16 +51,19 @@ const Collection = () => {
       <Header title={'COLLECTION'} navBarOnly={true} />
       <div className={contentContainer}>
         <CollectionFilters />
-        <div className={itemsContainer} ref={containerRef}>
-          {booksList.map((element) => {
-            return (
-              <BookCard
-                thumbnail={element.data().thumbnail}
-                title={element.data().title}
-                author={element.data().authors[0]}
-              />
-            );
-          })}
+        <div className={collectionContainer}>
+          <div className={itemsContainer} ref={containerRef}>
+            {booksList.map((element) => {
+              return (
+                <BookCard
+                  thumbnail={element.data().thumbnail}
+                  title={element.data().title}
+                  author={element.data().authors[0]}
+                  id={element.id}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

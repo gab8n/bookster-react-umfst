@@ -4,15 +4,23 @@
   height: 100vh;
   .contentContainer {
     display: flex;
-    height: 900px;
+    // height: 900px;
+    width: 100%;
   }
-  .itemsContainer {
-    height: 100%;
-    width: 70%;
-
-    background-color: aqua;
-    overflow-y: scroll;
+  .collectionContainer {
+    width: 100%;
     display: flex;
-    flex-flow: wrap;
+    justify-content: center;
+    height: max-content;
+    border-left: 1px solid rgba(0, 0, 0, 0.253);
+    // background-color: red;
+
+    .itemsContainer {
+      padding-top: 2%;
+      height: fit-content;
+      display: flex;
+      flex-flow: wrap;
+      justify-content: space-evenly;
+    }
   }
 }

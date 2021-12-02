@@ -1,13 +1,36 @@
 .cardContainer {
-  //   height: 25vw;
-  width: 20%;
-  background-color: blueviolet;
+  margin: 0 2%;
+  width: 15%;
+  min-width: 200px;
+  max-width: 350px;
   border-radius: 13px;
   .thumbnailStyle {
-    border-top-left-radius: 13px;
-    border-top-right-radius: 13px;
-
+    border-radius: 5px;
     width: 100%;
+    height: 70%;
+    border: 1px solid rgba(0, 0, 0, 0.068);
+    border-bottom: none;
   }
   margin-bottom: 50px;
+  .titleContainer {
+    text-decoration: none;
+    color: black;
+    h3 {
+      margin: 5% 0;
+      margin-bottom: 0;
+    }
+  }
+  .authorContainer {
+    margin: 1% 0;
+    margin-bottom: 5%;
+    font-weight: bold;
+    color: gray;
+    font-size: 0.9em;
+  }
+}
+.color {
+  color: #958ada;
+}
+.colorsecondary {
+  color: rgba(128, 128, 128, 0.288);
 }

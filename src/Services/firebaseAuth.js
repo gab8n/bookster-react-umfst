@@ -2,6 +2,7 @@ import firebase from 'utils/firebaseConfig';
 
 export const auth = firebase.auth();
 export const database = firebase.firestore();
+export const storage = firebase.storage();
 
 export const signInWithEmailAndPassword = (
   email,
@@ -108,6 +109,7 @@ const setNewUserData = (user, userData) => {
       borrowedBooks: [],
       bookHistory: [],
       creationDate: firebase.firestore.FieldValue.serverTimestamp(),
+      biography: '',
       ...userData,
     })
     .then()
@@ -122,20 +124,89 @@ export const getUserData = (handleSuccess, handleError) => {
     database
       .collection('users')
       .doc(user.uid)
-      .get()
-      .then((doc) => {
+      .onSnapshot((doc) => {
         if (doc.exists) {
           handleSuccess(doc.data());
         } else {
-          handleError('No user found!');
+          handleError('User does not exist');
         }
-      })
-      .catch((error) => {
-        handleError(error);
       });
+    // .get()
+    // .then((doc) => {
+    //   if (doc.exists) {
+    //     handleSuccess(doc.data());
+    //   } else {
+    //     handleError('No user found!');
+    //   }
+    // })
+    // .catch((error) => {
+    //   handleError(error);
+    // });
   }
 };
 
+export const changeProfilePicture = (file, handleSuccess, handleError) => {
+  const user = auth.currentUser;
+
+  storage
+    .ref('users/' + user.uid + '/profile.jpg')
+    .put(file)
+    .then(() => {
+      firebase
+        .storage()
+        .ref('users/' + user.uid + '/profile.jpg')
+        .getDownloadURL()
+        .then((imgUrl) => {
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(user.uid)
+            .update({ photoURL: imgUrl })
+            .then(() => {
+              user
+                .updateProfile({ photoURL: imgUrl })
+                .then(() => {
+                  // handleSuccess();
+                })
+                .catch(() => {
+                  // handleError('Error updating profile picture');
+                });
+            });
+
+          // handleSuccess();
+        })
+        .catch((error) => {
+          console.log(error);
+          // handleError(error.message);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+export const updateUserData = (userData) => {
+  const user = auth.currentUser;
+  database
+    .collection('users')
+    .doc(user.uid)
+    .update({
+      ...userData,
+    })
+    .then(() => {
+      console.log('success');
+      user
+        .updateProfile({ displayName: userData.displayName })
+        .then(() => {
+          // handleSuccess();
+        })
+        .catch(() => {
+          // handleError('Error updating profile picture');
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 export const signOut = (handleSuccess, handleError) =>
   auth
     .signOut()

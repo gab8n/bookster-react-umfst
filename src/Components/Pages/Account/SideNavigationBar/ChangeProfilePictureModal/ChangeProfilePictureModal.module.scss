@@ -1,0 +1,52 @@
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  .input {
+    width: 80%;
+    margin-bottom: 5%;
+  }
+  .uploadImageContainer {
+    display: flex;
+    justify-content: space-evenly;
+    .imagePreview {
+      width: 40%;
+      height: 100%;
+      border-radius: 50%;
+      border: white solid 6px;
+    }
+    .uploadButton {
+      border-radius: 13px;
+      font-weight: bold;
+      background-color: #303030;
+      color: white;
+      padding: 1em 1.2em;
+      cursor: pointer;
+      align-self: center;
+      font-size: 1.2em;
+      &:hover {
+        background-color: #303030da;
+      }
+      * {
+        display: none;
+      }
+    }
+  }
+  .button {
+    width: 90%;
+    border-radius: 13px;
+    background-color: #303030;
+    margin: 5% 0;
+    color: white;
+    padding: 1em 1.2em;
+    cursor: pointer;
+    align-self: center;
+    font-size: 1.2em;
+    border: none;
+    &:hover {
+      background-color: #1f1f1f;
+    }
+  }
+}

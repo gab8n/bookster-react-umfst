@@ -1,6 +1,13 @@
 import styles from 'Components/Common/Button/Button.module.scss';
-
-const Button = ({ className, label, type, onClick }) => {
+const Button = ({
+  className,
+  label,
+  type,
+  onClick,
+  textButton,
+  startAdorment,
+  endAdorment,
+}) => {
   const { buttonStyle } = styles;
   return (
     <button
@@ -8,7 +15,9 @@ const Button = ({ className, label, type, onClick }) => {
       className={className ? className : buttonStyle}
       type={type && type}
     >
-      {label}
+      {startAdorment && startAdorment}
+      <span className={textButton && textButton}>{label}</span>
+      {endAdorment && endAdorment}
     </button>
   );
 };

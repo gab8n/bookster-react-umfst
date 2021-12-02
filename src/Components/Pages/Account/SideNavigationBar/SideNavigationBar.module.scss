@@ -1,8 +1,46 @@
 .container {
   height: 100%;
   width: 20%;
-  background-color: aqua;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  // justify-content: space-between;
+  align-items: center;
+  border-right: gray solid 1px;
+  .userName {
+    font-size: 1.5rem;
+  }
+  .navContainer {
+    margin-top: 20%;
+    width: 100%;
+    border-top: gray solid 1px;
+    .button {
+      width: 100%;
+      padding: 7% 10%;
+      border: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      font-size: 1.4em;
+      border-bottom: gray solid 1px;
+      background-color: transparent;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(211, 211, 211, 0.493);
+      }
+    }
+
+    .adorment {
+      margin-right: 0.5em;
+      font-size: 1.1em;
+    }
+    .activeTab {
+      background-color: #958ada;
+      color: white;
+      border: none;
+      &:hover {
+        background-color: #958adaea;
+      }
+    }
+  }
 }

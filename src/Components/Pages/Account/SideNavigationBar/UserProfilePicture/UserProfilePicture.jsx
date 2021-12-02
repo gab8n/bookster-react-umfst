@@ -1,10 +1,21 @@
 import styles from './UserProfilePicture.module.scss';
+import CustomModal from 'Components/Common/CustomModal/CustomModal';
+import ChangeProfilePictureModal from '../ChangeProfilePictureModal/ChangeProfilePictureModal';
 
 const UserProfilePicture = ({ photoURL }) => {
-  const { container } = styles;
+  const { container, imageStyle } = styles;
 
   photoURL = photoURL?.replace('=s96-c', '=s400-c');
-  return <img className={container} src={photoURL} alt="user profile" />;
+  return (
+    <CustomModal
+      modalButton={
+        <div className={container}>
+          <img className={imageStyle} src={photoURL} alt="user profile" />
+        </div>
+      }
+      modalContent={<ChangeProfilePictureModal {...{ photoURL }} />}
+    />
+  );
 };
 
 export default UserProfilePicture;

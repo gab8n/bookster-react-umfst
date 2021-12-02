@@ -1,0 +1,48 @@
+.conatiner {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  padding-top: 2%;
+  padding-bottom: 0%;
+  .title {
+    font-size: 2em;
+  }
+  .lineContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+  }
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    .inputLabel {
+      font-weight: bold;
+      margin-bottom: 1em;
+    }
+    .input {
+      border: 2px solid #958ada86;
+      padding: 1.2em;
+      outline: none;
+      &:focus {
+        border: 2px solid #958ada;
+      }
+    }
+  }
+  .textareaConatiner {
+    width: 100%;
+    .textarea {
+      border: 2px solid #958ada86;
+      border-radius: 13px;
+      resize: none;
+      font-size: 1em;
+      font-weight: bold;
+      padding: 1em;
+      outline: none;
+      &:focus {
+        border: 2px solid #958ada;
+      }
+    }
+  }
+}

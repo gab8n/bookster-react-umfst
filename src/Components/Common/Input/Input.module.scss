@@ -14,4 +14,7 @@
     outline-style: solid;
     outline-width: 1.5px;
   }
+  &:disabled {
+    background-color: white;
+  }
 }

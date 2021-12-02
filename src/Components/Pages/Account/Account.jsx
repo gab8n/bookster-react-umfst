@@ -7,9 +7,12 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from 'Services/firebaseAuth';
 import { toast } from 'react-toastify';
+import AccountSettings from './AccountSettings/AccountSettings';
 
 const Account = () => {
   const [userAccountData, setUserAccountData] = useState();
+  const [accountTab, setAccountTab] = useState('profile');
+
   const handleError = (error) => {
     toast.error(error);
   };
@@ -27,8 +30,15 @@ const Account = () => {
     <>
       <Header title={'ACCOUNT'} navBarOnly={true} />
       <div className={pageContainer}>
-        <SideNavigationBar photoURL={userAccountData?.photoURL} />
-        <div className={contentContainer}></div>
+        <SideNavigationBar
+          photoURL={userAccountData?.photoURL}
+          onChangeTab={(tab) => setAccountTab(tab)}
+          currentTab={accountTab}
+        />
+
+        <main className={contentContainer}>
+          <AccountSettings {...{ userAccountData }} />
+        </main>
       </div>
     </>
   );
