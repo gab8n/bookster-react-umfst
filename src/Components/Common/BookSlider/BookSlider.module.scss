@@ -1,0 +1,51 @@
+// @import 'slick-carousel/slick/slick.css';
+// @import 'slick-carousel/slick/slick-theme.css';
+
+.container {
+  width: 90%;
+  margin-top: 100px;
+  .titleStyle {
+    font-size: 2em;
+  }
+  .sliderContainer {
+    width: 100%;
+    position: relative;
+
+    .nextArrow {
+      position: absolute;
+      left: 0;
+      top: 0%;
+      width: 5%;
+      height: 99%;
+
+      color: rgb(100, 100, 100);
+      z-index: 1;
+
+      cursor: pointer;
+      &:hover {
+        color: #958ada;
+      }
+    }
+    .prevArrow {
+      position: absolute;
+      right: 0;
+      top: 0%;
+      width: 5%;
+      height: 99%;
+      color: rgb(100, 100, 100);
+      z-index: 1;
+
+      cursor: pointer;
+      &:hover {
+        color: #958ada;
+      }
+    }
+    .slideCardContainer {
+      cursor: pointer;
+
+      :hover {
+        outline: solid 1px #958ada;
+      }
+    }
+  }
+}

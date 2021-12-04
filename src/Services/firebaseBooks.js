@@ -59,6 +59,38 @@ export const getBooks = (
       console.log('Error getting documents: ', error);
     });
 };
+export const getBooksForSlider = (setBooksList) => {
+  let bookCollection = database
+    .collection('books')
+    .orderBy('timestamp')
+    .limit(20);
+
+  bookCollection
+    .get()
+    .then((querySnapshot) => {
+      let booksArray = [];
+      querySnapshot.forEach((doc) => {
+        booksArray.push(doc);
+      });
+      setBooksList(booksArray);
+    })
+    .catch((error) => {
+      console.log('Error getting documents: ', error);
+    });
+};
+export const getBook = (id, setBook) => {
+  database
+    .collection('books')
+    .doc(id)
+    .onSnapshot((doc) => {
+      if (doc.exists) {
+        // handleSuccess(doc.data());
+        setBook(doc.data());
+      } else {
+        // handleError('User does not exist');
+      }
+    });
+};
 
 export const addBookFilter = (filter, type, handleSuccess, handleError) => {
   console.log(type, filter);

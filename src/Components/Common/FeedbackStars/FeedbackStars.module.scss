@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+
+  .starsContainer {
+    // width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1em;
+    .button {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .on {
+      color: #958ada;
+    }
+    .off {
+      color: rgba(128, 128, 128, 0.288);
+    }
+    .starStyle {
+      font-size: 2em;
+    }
+  }
+
+  .scoreStyle {
+    font-weight: bold;
+    white-space: nowrap;
+  }
+}
