@@ -6,9 +6,13 @@ import Faq from 'Components/Pages/Faq/Faq';
 import Contact from 'Components/Pages/Contact/Contact';
 import Book from 'Components/Pages/Book/Book';
 import Page404 from 'Components/Pages/Page404/Page404';
+import Messages from 'Components/Pages/Messages/Messages';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { populateDbWithUsers } from 'Services/firebaseAuth';
 
 function App() {
+  useEffect(() => {}, []);
   return (
     <Router>
       <Switch>
@@ -17,6 +21,7 @@ function App() {
         <Route path="/faq" component={Faq} exact={true}></Route>
         <Route path="/contact" component={Contact} exact={true}></Route>
         <Route path="/account" component={Account} exact={true}></Route>
+        <Route path="/messages" component={Messages} exact={true}></Route>
         <Route path="/collection" component={Collection}></Route>
         <Route path="/book/:id" component={Book}></Route>
         <Route path="/" component={Home} exact={true}></Route>

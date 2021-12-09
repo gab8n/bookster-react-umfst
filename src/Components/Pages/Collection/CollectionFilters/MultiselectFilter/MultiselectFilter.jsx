@@ -1,39 +1,14 @@
 import CheckBox from 'Components/Common/CheckBox/CheckBox';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import styles from './MultiselectFilter.module.scss';
-// import { setOptions, setFilters } from 'Redux/Ducks/bookCollectionFilters';
 
 const MultiselectFilter = ({ title, options, onChange }) => {
-  // console.log(options);
-  // const [checkedState, setCheckedState] = useState(
-  //   new Array(options.length).fill(false)
-  // );
-  // console.log(checkedState);
-
-  // dispatch(setFilters(1, 'GENRE'));
-  // dispatch(setFilters(2, 'GENRE'));
-  // dispatch(setFilters(3, 'GENRE'));
-
   const [isExpanded, setIsExpanded] = useState(true);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
-  };
-
-  // useEffect(() => {
-  //   // const filters = options.filter(
-  //   //   (element, index) => checkedState[index] === true
-  //   // );
-  // }, [checkedState]);
-
-  const handleOnChange = (position) => {
-    // const updatedCheckedState = checkedState.map((item, index) =>
-    //   index === position ? !item : item
-    // );
-    // setCheckedState(updatedCheckedState);
-    onChange(position);
   };
 
   const {

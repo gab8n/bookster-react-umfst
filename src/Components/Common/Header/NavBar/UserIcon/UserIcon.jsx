@@ -58,13 +58,9 @@ const UserIcon = () => {
           <Link to="/account" onClick={(e) => {}}>
             <Button label="Account" className={dropdownButton} />
           </Link>
-          <Button
-            label="Messages"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className={dropdownButton}
-          />
+          <Link to="/messages" onClick={(e) => {}}>
+            <Button label="Messages" className={dropdownButton} />
+          </Link>
           <Button
             label="Logout"
             onClick={(e) => {

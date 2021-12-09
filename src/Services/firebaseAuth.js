@@ -1,4 +1,5 @@
 import firebase from 'utils/firebaseConfig';
+import axios from 'axios';
 
 export const auth = firebase.auth();
 export const database = firebase.firestore();
@@ -66,14 +67,20 @@ export const createUserWithEmailAndPassword = (
           displayName: username,
         })
         .then(() => {
-          const userData = {
-            uid: currentUser.user.uid,
-            email: currentUser.user.email,
-            displayName: username,
-            photoURL: currentUser.user.photoURL,
-          };
-          setNewUserData(currentUser.user, userData);
-          handleSuccess(userData);
+          firebase
+            .storage()
+            .ref('users/defaultProfilePicture/userAvatar.svg')
+            .getDownloadURL()
+            .then((imgUrl) => {
+              const userData = {
+                uid: currentUser.user.uid,
+                email: currentUser.user.email,
+                displayName: username,
+                photoURL: imgUrl,
+              };
+              setNewUserData(currentUser.user, userData);
+              handleSuccess(userData);
+            });
         });
     })
     .catch((error) => {
@@ -216,3 +223,41 @@ export const signOut = (handleSuccess, handleError) =>
     .catch((error) => {
       handleError(error.message);
     });
+
+//#########################-  developing purpose -#############################
+
+export const populateDbWithUsers = () => {
+  axios.get(`https://randomuser.me/api/`).then((res) => {
+    const user = res.data.results[0];
+
+    auth
+      .createUserWithEmailAndPassword(user.email, user.login.password)
+      .then((currentUser) => {
+        currentUser.user
+          .updateProfile({
+            displayName: user.login.username,
+          })
+          .then(() => {
+            const userData = {
+              uid: currentUser.user.uid,
+              email: currentUser.user.email,
+              displayName: user.login.username,
+              photoURL: user.picture.thumbnail,
+              familyName: user.name.last,
+              givenName: user.name.first,
+              phone: user.phone,
+              address: user.location.street,
+              city: user.location.city,
+              state: user.location.state,
+              wishlist: [],
+              borrowedBooks: [],
+              bookHistory: [],
+            };
+            setNewUserData(currentUser.user, userData);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+};

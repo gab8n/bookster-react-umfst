@@ -2,7 +2,6 @@ import styles from './SlideCard.module.scss';
 
 const SlideCard = ({ book }) => {
   const { image } = styles;
-  console.log(book.data().thumbnail);
   return (
     <>
       <img
