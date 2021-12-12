@@ -9,12 +9,20 @@ export const signInWithEmailAndPassword = (
   email,
   password,
   handleSuccess,
-  handleError
+  handleError,
+  setData
 ) => {
   auth
     .signInWithEmailAndPassword(email, password)
     .then((currentUser) => {
       handleSuccess(currentUser);
+      const userData = {
+        uid: currentUser.user.uid,
+        email: currentUser.user.email,
+        displayName: currentUser.user.displayName,
+        photoURL: currentUser.user.photoURL,
+      };
+      setData(userData);
     })
     .catch((error) => {
       handleError(error.message);
@@ -62,16 +70,17 @@ export const createUserWithEmailAndPassword = (
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((currentUser) => {
-      currentUser.user
-        .updateProfile({
-          displayName: username,
-        })
-        .then(() => {
-          firebase
-            .storage()
-            .ref('users/defaultProfilePicture/userAvatar.svg')
-            .getDownloadURL()
-            .then((imgUrl) => {
+      firebase
+        .storage()
+        .ref('users/defaultProfilePicture/userAvatar.svg')
+        .getDownloadURL()
+        .then((imgUrl) => {
+          currentUser.user
+            .updateProfile({
+              displayName: username,
+              photoURL: imgUrl,
+            })
+            .then(() => {
               const userData = {
                 uid: currentUser.user.uid,
                 email: currentUser.user.email,

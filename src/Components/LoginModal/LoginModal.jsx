@@ -33,7 +33,10 @@ const LoginModal = ({ toggleRegister, toggleResetPassword, toggleModal }) => {
       credentials.email,
       credentials.password,
       handleSuccess,
-      handleError
+      handleError,
+      (data) => {
+        dispatch(setUserData(data));
+      }
     );
   };
   const handleGoogleLogin = () => {

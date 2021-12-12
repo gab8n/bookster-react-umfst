@@ -21,46 +21,14 @@ const Messages = () => {
   const [socket, setSocket] = useState();
   const [online, setOnline] = useState();
 
-  // useEffect(() => {
-  //   socket?.on('message', (data) => {
-  //     let temp = messages;
-  //     temp.push({
-  //       userId: data.userId,
-  //       username: data.username,
-  //       text: data.text,
-  //     });
-  //     setMessages([...temp]);
-  //     setOnline(data.online);
-  //     console.log(data.online);
-  //   });
-  //   return () => socket?.emit('disconecting');
-  // }, [socket]);
-
-  // useEffect(() => {
-  //   const newSocket = io.connect('/', { query: { id } });
-  //   setSocket(newSocket);
-  // }, [id]);
-
-  // const sendData = () => {
-  //   if (name !== '') {
-  //     socket.emit('joinRoom', { username: name });
-  //     //if empty error message pops up and returns to the same page
-  //   } else {
-  //     alert('username and roomname are must !');
-  //     window.location.reload();
-  //   }
-  // };
-  // const disconnectFromSocket = () => {
-  //   socket?.emit('disconecting');
-  //   // socket?.disconnect();
-  // };
-
-  // const sendMessage = () => {
-  //   if (message !== '') {
-  //     socket.emit('chat', message);
-  //     setMessage('');
-  //   }
-  // };
+  const disconnectFromRoom = () => {
+    socket.disconnect();
+  };
+  useEffect(() => {
+    const newSocket = io.connect('/', { query: { id } });
+    setSocket(newSocket);
+    // return () => socket?.disconnect();
+  }, []);
 
   const { pageContainer, contentContainer, mainContainer } = styles;
 
@@ -69,7 +37,7 @@ const Messages = () => {
       <Header {...{ headerLogo }} title={'CHAT'} navBarOnly={true} />
       <div className={contentContainer}>
         <MessagesSideBar {...{ userData, talkingContact, setTalkingContact }} />
-        <MessagesChat {...{ userData, talkingContact }} />
+        <MessagesChat {...{ userData, talkingContact, socket }} />
       </div>
     </div>
   );

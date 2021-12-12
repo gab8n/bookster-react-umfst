@@ -28,9 +28,12 @@ const MessagesSideBar = ({ userData, talkingContact, setTalkingContact }) => {
   const { sidebarContainer, input, searchContainer, itemsContainer } = styles;
 
   const handleContactClick = (contactId) => {
-    isContactList
-      ? createConversation(userData.uid, contactId)
-      : setTalkingContact(contactId);
+    if (isContactList) {
+      createConversation(userData.uid, contactId);
+      toggleContactList();
+    } else {
+      setTalkingContact(contactId);
+    }
   };
 
   return (

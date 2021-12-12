@@ -1,5 +1,11 @@
 import firebase from 'utils/firebaseConfig';
 import uuid from 'react-uuid';
+import {
+  generateRSAKeys,
+  encryptRSAKeys,
+  decryptRSAKeys,
+  decryptString,
+} from 'utils/RSAEncryption';
 
 export const auth = firebase.auth();
 export const database = firebase.firestore();
@@ -66,73 +72,140 @@ export const getAllContactableUsers = (userId, searchedName, setData) => {
 export const createConversation = (userId, contactId) => {
   const roomId = uuid();
   database
-    .collection('userMessages')
-    .doc(userId)
-    .collection('conversations')
-    .doc(contactId)
-    .set({
-      editedTime: firebase.firestore.Timestamp.now(),
-      messages: [
-        {
-          message: 'I added you to my contacts',
-          senderId: userId,
-          timestamp: firebase.firestore.Timestamp.now(),
-        },
-      ],
-      roomId: roomId,
-      seen: false,
-    })
-    .then(() => {
+    .collection('projectVariables')
+    .doc('variables')
+    .get()
+    .then((doc) => {
+      const userEncryptedKeys = encryptRSAKeys(
+        generateRSAKeys(),
+        doc.data().MASTER_ENCRYPTION_PUBLIC_KEY
+      );
+
+      const contactEncryptedKeys = encryptRSAKeys(
+        generateRSAKeys(),
+        doc.data().MASTER_ENCRYPTION_PUBLIC_KEY
+      );
       database
         .collection('userMessages')
-        .doc(contactId)
-        .collection('conversations')
         .doc(userId)
+        .collection('conversations')
+        .doc(contactId)
         .set({
+          publicKey: contactEncryptedKeys.encryptedPublicKey,
+          privateKey: userEncryptedKeys.encryptedPrivateKey,
           editedTime: firebase.firestore.Timestamp.now(),
-          messages: [
-            {
-              message: 'I added you to my contacts',
-              senderId: userId,
-              timestamp: firebase.firestore.Timestamp.now(),
-            },
-          ],
+          messages: [],
           roomId: roomId,
           seen: false,
         })
         .then(() => {
-          console.log('Conversation Created');
+          database
+            .collection('userMessages')
+            .doc(contactId)
+            .collection('conversations')
+            .doc(userId)
+            .set({
+              publicKey: userEncryptedKeys.encryptedPublicKey,
+              privateKey: contactEncryptedKeys.encryptedPrivateKey,
+              editedTime: firebase.firestore.Timestamp.now(),
+              messages: [],
+              roomId: roomId,
+              seen: false,
+            })
+            .then(() => {
+              console.log('Conversation Created');
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           console.log(error);
         });
-    })
-    .catch((error) => {
-      console.log(error);
     });
 };
+
 export const getUserConversation = (
   userId,
   contactId,
   setMessages,
-  setRoomId
+  setRoomId,
+  setKeys
 ) => {
   const userMessagesCollection = database
     .collection('userMessages')
     .doc(userId)
     .collection('conversations')
     .doc(contactId);
+  const contactMessagesCollection = database
+    .collection('userMessages')
+    .doc(contactId)
+    .collection('conversations')
+    .doc(userId);
+
   userMessagesCollection.get().then((doc) => {
     if (doc.exists) {
-      setMessages(doc.data().messages);
       setRoomId(doc.data().roomId);
+      const decryptedKeys = decryptRSAKeys(
+        doc.data().publicKey,
+        doc.data().privateKey
+      );
+      setKeys({
+        publicKey: decryptedKeys.decryptedPublicKey,
+        privateKey: decryptedKeys.decryptedPrivateKey,
+      });
+      contactMessagesCollection.get().then((contactDoc) => {
+        const contactDecryptedKeys = decryptRSAKeys(
+          contactDoc.data().publicKey,
+          contactDoc.data().privateKey
+        );
+        const messages = doc.data().messages.map((message) => {
+          if (message.senderId === userId) {
+            return {
+              message: decryptString(
+                message.message,
+                contactDecryptedKeys.decryptedPrivateKey
+              ),
+              senderId: message.senderId,
+              timestamp: message.timestamp,
+            };
+          } else if (message.senderId === contactId) {
+            return {
+              message: decryptString(
+                message.message,
+                decryptedKeys.decryptedPrivateKey
+              ),
+              senderId: message.senderId,
+              timestamp: message.timestamp,
+            };
+          }
+        });
+        setMessages(messages);
+      });
     } else {
       setMessages(null);
       setRoomId(null);
     }
-    userMessagesCollection.update({ seen: true });
   });
+  userMessagesCollection.update({ seen: true });
 };
+
+export const addMessageOnConversation = (userId, contactId, message, seen) => {
+  database
+    .collection('userMessages')
+    .doc(userId)
+    .collection('conversations')
+    .doc(contactId)
+    .update({
+      messages: firebase.firestore.FieldValue.arrayUnion({
+        message: message.text,
+        senderId: message.userId,
+        timestamp: firebase.firestore.Timestamp.now(),
+      }),
+      seen: seen,
+    });
+};
+
 export const getContactData = (contactId, setData) => {
   const userData = database.collection('users');
   userData
@@ -140,8 +213,8 @@ export const getContactData = (contactId, setData) => {
     .get()
     .then((doc) => {
       setData({
-        displayName: doc.data().displayName,
-        photoURL: doc.data().photoURL,
+        displayName: doc.data()?.displayName,
+        photoURL: doc.data()?.photoURL,
       });
     });
 };
