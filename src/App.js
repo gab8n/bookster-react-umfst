@@ -10,7 +10,7 @@ import Messages from 'Components/Pages/Messages/Messages';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { populateDbWithUsers } from 'Services/firebaseAuth';
-
+import { setAllBooksStatusToAviable } from 'Services/firebaseBooks';
 function App() {
   useEffect(() => {}, []);
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/aboutus" component={AboutUs} exact={true}></Route>
         <Route path="/faq" component={Faq} exact={true}></Route>
         <Route path="/contact" component={Contact} exact={true}></Route>
-        <Route path="/account" component={Account} exact={true}></Route>
+        <Route path="/account/:subpage" component={Account}></Route>
         <Route path="/messages" component={Messages} exact={true}></Route>
         <Route path="/collection" component={Collection}></Route>
         <Route path="/book/:id" component={Book}></Route>

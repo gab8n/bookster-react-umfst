@@ -47,12 +47,12 @@ const Collection = () => {
   const containerRef = useBottomScrollListener(handleScroll);
 
   return (
-    <div className={pageContainer}>
+    <div className={pageContainer} ref={containerRef}>
       <Header title={'COLLECTION'} navBarOnly={true} />
       <div className={contentContainer}>
         <CollectionFilters />
         <div className={collectionContainer}>
-          <div className={itemsContainer} ref={containerRef}>
+          <div className={itemsContainer}>
             {booksList.map((element) => {
               return (
                 <BookCard

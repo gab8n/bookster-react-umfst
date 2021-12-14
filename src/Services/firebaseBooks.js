@@ -25,7 +25,9 @@ export const getBooks = (
 ) => {
   const { genres, authors, publisher } = filters;
 
-  let bookCollection = database.collection('books');
+  let bookCollection = database
+    .collection('books')
+    .where('status', '==', 'aviable');
   bookCollection =
     genres.length !== 0
       ? bookCollection.where('genres', 'array-contains-any', genres)
@@ -149,3 +151,16 @@ export const getFilters = (type, setData) => {
 //       console.log('Error getting documents: ', error);
 //     });
 // };
+
+export const setAllBooksStatusToAviable = () => {
+  database
+    .collection('books')
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({
+          status: 'aviable',
+        });
+      });
+    });
+};

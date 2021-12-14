@@ -27,7 +27,9 @@ const Book = () => {
     bookGenres,
     ratingContainer,
   } = styles;
+
   const { id } = useParams();
+
   const [book, setBook] = useState({});
 
   useEffect(() => {

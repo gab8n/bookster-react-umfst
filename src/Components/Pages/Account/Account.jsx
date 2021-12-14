@@ -8,22 +8,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from 'Services/firebaseAuth';
 import { toast } from 'react-toastify';
 import AccountSettings from './AccountSettings/AccountSettings';
+import AccountWishlist from './AccountWishlist/AccountWishlist';
+import AccountBorrowed from './AccountBorrowed/AccountBorrowed';
+import AccountSecurity from './AccountSecurity/AccountSecurity';
+import { useParams } from 'react-router-dom';
 
 const Account = () => {
   const [userAccountData, setUserAccountData] = useState();
   const [accountTab, setAccountTab] = useState('profile');
 
+  const { subpage } = useParams();
   const handleError = (error) => {
     toast.error(error);
   };
-
   const handleSuccess = (data) => {
     setUserAccountData(data);
   };
 
   useEffect(() => {
     getUserData(handleSuccess, handleError);
-  }, []);
+    console.log(subpage);
+  }, [subpage]);
 
   const { pageContainer, contentContainer } = styles;
   return (
@@ -32,12 +37,21 @@ const Account = () => {
       <div className={pageContainer}>
         <SideNavigationBar
           photoURL={userAccountData?.photoURL}
-          onChangeTab={(tab) => setAccountTab(tab)}
-          currentTab={accountTab}
+          currentTab={subpage}
         />
 
         <main className={contentContainer}>
-          <AccountSettings {...{ userAccountData }} />
+          {subpage === 'profile' ? (
+            <AccountSettings {...{ userAccountData }} />
+          ) : subpage === 'wishlist' ? (
+            <AccountWishlist />
+          ) : subpage === 'borrowed' ? (
+            <AccountBorrowed />
+          ) : subpage === 'security' ? (
+            <AccountSecurity />
+          ) : (
+            <AccountSettings {...{ userAccountData }} />
+          )}
         </main>
       </div>
     </>
