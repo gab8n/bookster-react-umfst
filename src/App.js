@@ -10,9 +10,16 @@ import Messages from 'Components/Pages/Messages/Messages';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { populateDbWithUsers } from 'Services/firebaseAuth';
-import { setAllBooksStatusToAviable } from 'Services/firebaseBooks';
+import {
+  setAllBooksStatusToAviable,
+  getBooksAll,
+  addBooksToBooksTest,
+} from 'Services/firebaseBooks';
 function App() {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // getBooksAll();
+    // addBooksToBooksTest();
+  }, []);
   return (
     <Router>
       <Switch>

@@ -5,16 +5,12 @@
   overflow-y: scroll;
   .contentContainer {
     display: flex;
-    // height: 900px;
     width: 100%;
   }
   .collectionContainer {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    height: max-content;
+    min-height: 100%;
     border-left: 1px solid rgba(0, 0, 0, 0.253);
-    // background-color: red;
 
     .itemsContainer {
       padding-top: 2%;

@@ -1,0 +1,12 @@
+.container {
+  width: calc(100% - 2em);
+  padding: 1em;
+  .dropdownContainer {
+    display: flex;
+    align-items: center;
+    .sortText {
+      margin: 0;
+      margin-right: 0.5em;
+    }
+  }
+}

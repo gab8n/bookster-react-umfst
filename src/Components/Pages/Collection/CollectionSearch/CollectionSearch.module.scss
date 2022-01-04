@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5em 0;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.253);
+
+  .inputContainer {
+    min-width: 350px;
+    width: 30%;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+
+    .input {
+      width: 80%;
+      border-radius: 0;
+      border-top-left-radius: 13px;
+      border-bottom-left-radius: 13px;
+      padding: 1.3em;
+      font-size: 1em;
+      outline: solid 1px rgba(0, 0, 0, 0.089);
+    }
+    .inputIcon {
+      padding: 1.4em 1.1em;
+      cursor: pointer;
+      background-color: #958ada;
+      border-top-right-radius: 13px;
+      border-bottom-right-radius: 13px;
+      &:hover {
+        color: white;
+      }
+      border: solid 0.05em #958ada;
+    }
+  }
+}

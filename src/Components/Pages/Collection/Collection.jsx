@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CollectionFilters from './CollectionFilters/CollectionFilters';
 import { clearFilters } from 'Redux/Ducks/bookCollectionFilters';
+import CollectionSearch from './CollectionSearch/CollectionSearch';
+import CollectionSortFilters from './CollectionSortFilters/CollectionSortFilters';
 
 const Collection = () => {
   const [booksList, setBooksList] = useState([]);
@@ -17,6 +19,21 @@ const Collection = () => {
   );
 
   const itemsPerPage = 20;
+
+  const sortOptions = ['Newest', 'Oldest', 'A-Z', 'Z-A', 'Most Popular'];
+  const defaultSortOption = 'Newest';
+  const [selectedSortOption, setSelectedSortOption] =
+    useState(defaultSortOption);
+
+  const handleSortOptionChanged = (option) => {
+    setSelectedSortOption(option);
+  };
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchTermChanged = (term) => {
+    setSearchTerm(term);
+  };
   const {
     itemsContainer,
     pageContainer,
@@ -32,8 +49,15 @@ const Collection = () => {
 
   useEffect(() => {
     setBooksList([]);
-    getBooks(itemsPerPage, booksList[itemsPerPage], setBooksList, filters);
-  }, [itemsPerPage, filters]);
+    getBooks(
+      itemsPerPage,
+      booksList[itemsPerPage],
+      setBooksList,
+      filters,
+      selectedSortOption,
+      searchTerm
+    );
+  }, [itemsPerPage, filters, selectedSortOption, searchTerm]);
 
   const handleScroll = () => {
     getBooks(
@@ -49,9 +73,14 @@ const Collection = () => {
   return (
     <div className={pageContainer} ref={containerRef}>
       <Header title={'COLLECTION'} navBarOnly={true} />
+      <CollectionSearch onSubmit={(value) => handleSearchTermChanged(value)} />
       <div className={contentContainer}>
         <CollectionFilters />
         <div className={collectionContainer}>
+          <CollectionSortFilters
+            {...{ sortOptions, defaultSortOption }}
+            onSelectOption={handleSortOptionChanged}
+          />
           <div className={itemsContainer}>
             {booksList.map((element) => {
               return (

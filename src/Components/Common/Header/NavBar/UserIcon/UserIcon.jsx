@@ -55,7 +55,7 @@ const UserIcon = () => {
             !isVisible ? userIconDropdown : `${userIconDropdown} ${visible}`
           }
         >
-          <Link to="/account" onClick={(e) => {}}>
+          <Link to="/account/profile" onClick={(e) => {}}>
             <Button label="Account" className={dropdownButton} />
           </Link>
           <Link to="/messages" onClick={(e) => {}}>

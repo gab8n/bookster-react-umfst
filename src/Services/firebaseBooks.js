@@ -21,7 +21,9 @@ export const getBooks = (
   itemsPerPage,
   lastVisibleDocument,
   setBooksList,
-  filters
+  filters,
+  sort,
+  search
 ) => {
   const { genres, authors, publisher } = filters;
 
@@ -36,15 +38,27 @@ export const getBooks = (
     authors.length !== 0
       ? bookCollection.where('authors', 'array-contains-any', authors)
       : bookCollection;
-  bookCollection = publisher.length
-    ? bookCollection.where('publisher', 'in', publisher)
-    : bookCollection;
-  bookCollection = lastVisibleDocument
+  bookCollection =
+    publisher.length !== 0
+      ? bookCollection.where('publisher', 'in', publisher)
+      : bookCollection;
+  bookCollection = search
     ? bookCollection
-        .orderBy('timestamp')
-        .startAt(lastVisibleDocument)
-        .limit(itemsPerPage)
-    : bookCollection.orderBy('timestamp').limit(itemsPerPage);
+        .where('title', '>=', search)
+        .where('title', '<=', search + '\uf8ff')
+    : bookCollection;
+
+  bookCollection =
+    sort === 'newest'
+      ? bookCollection.orderBy('timestamp', 'desc')
+      : sort === 'oldest'
+      ? bookCollection.orderBy('timestamp', 'asc')
+      : sort === 'A-Z'
+      ? bookCollection.orderBy('title', 'asc')
+      : bookCollection.orderBy('title', 'desc');
+  bookCollection = lastVisibleDocument
+    ? bookCollection.startAt(lastVisibleDocument).limit(itemsPerPage)
+    : bookCollection.limit(itemsPerPage);
 
   bookCollection
     .get()
@@ -136,21 +150,24 @@ export const getFilters = (type, setData) => {
 
 //Dev Purpose -###################################
 
-// export const getBooksAll = () => {
-//   const bookCollection = database.collection('books');
+export const getBooksAll = () => {
+  const bookCollection = database.collection('books');
+  let x = 0;
 
-//   bookCollection
-//     .get()
-//     .then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         console.log(doc.data().publisher);
-//         addBookFilter(doc.data().publisher, 'publisher');
-//       });
-//     })
-//     .catch((error) => {
-//       console.log('Error getting documents: ', error);
-//     });
-// };
+  bookCollection
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        x++;
+        console.log(x, doc.data());
+        // console.log(doc.data().publisher);
+        // addBookFilter(doc.data().publisher, 'publisher');
+      });
+    })
+    .catch((error) => {
+      console.log('Error getting documents: ', error);
+    });
+};
 
 export const setAllBooksStatusToAviable = () => {
   database
@@ -161,6 +178,17 @@ export const setAllBooksStatusToAviable = () => {
         doc.ref.update({
           status: 'aviable',
         });
+      });
+    });
+};
+export const addBooksToBooksTest = () => {
+  database
+    .collection('books')
+    .limit(10)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        database.collection('booksTest').doc(doc.id).set(doc.data());
       });
     });
 };

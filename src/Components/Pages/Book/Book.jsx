@@ -5,7 +5,13 @@ import { getBook } from 'Services/firebaseBooks';
 import { useState, useEffect } from 'react';
 import Button from 'Components/Common/Button/Button';
 import { FaHeart, PFaHeart, FaShoppingCart, FaRegHeart } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import FeedbackStars from 'Components/Common/FeedbackStars/FeedbackStars';
+import {
+  checkIfBookIsInWishlist,
+  addBookToWishlist,
+  removeBookFromWishlist,
+} from 'Services/firebaseUserActions';
 
 const Book = () => {
   const {
@@ -29,12 +35,14 @@ const Book = () => {
   } = styles;
 
   const { id } = useParams();
+  const userId = useSelector((state) => state.authStore.userData.uid);
 
   const [book, setBook] = useState({});
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   useEffect(() => {
     getBook(id, setBook);
-    console.log(book);
+    checkIfBookIsInWishlist(id, userId, setIsInWishlist);
   }, []);
 
   return (
@@ -68,6 +76,11 @@ const Book = () => {
             className={wishlistButton}
             label={'WHISHIST'}
             startAdorment={<FaRegHeart className={wishlistButtonAdorment} />}
+            onClick={() =>
+              isInWishlist
+                ? removeBookFromWishlist(id, userId)
+                : addBookToWishlist(id, userId)
+            }
           />
         </div>
       </main>

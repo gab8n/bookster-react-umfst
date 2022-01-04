@@ -1,0 +1,50 @@
+.container {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4em 0.7em;
+  border-radius: 7px;
+  outline: solid 1px #00000021;
+  cursor: pointer;
+  position: relative;
+  .selectedOptionText {
+    font-size: 0.9em;
+    user-select: none;
+  }
+  .icon {
+    font-size: 2em;
+    color: #958ada;
+  }
+  .selectableOptionsContainer {
+    position: absolute;
+    top: 101%;
+    width: calc(100% - 2.2em);
+    display: flex;
+    flex-direction: column;
+
+    .selectableOptionText {
+      width: 100%;
+      background-color: rgb(255, 255, 255);
+      padding: 0.2em 0.4em;
+      user-select: none;
+      border-bottom: solid 0.5px #0000000e;
+
+      &:hover {
+        background-color: #958ada;
+        color: white;
+      }
+    }
+    .selectableOptionTextSelected {
+      width: 100%;
+      padding: 0.2em 0.4em;
+      user-select: none;
+      background-color: #958ada;
+      color: white;
+      border-bottom: solid 0.5px #0000000e;
+    }
+  }
+}
+.hidden {
+  display: none;
+}
