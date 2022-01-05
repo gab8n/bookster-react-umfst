@@ -1,0 +1,55 @@
+.modalContent {
+  margin-top: -1.5em;
+  .modalForm {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    .input {
+      margin-bottom: 1em;
+    }
+    .twoElementsOnRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .input {
+        width: 38.5%;
+      }
+    }
+    .phoneNumberInput {
+      border-radius: 13px !important;
+      width: 100% !important;
+      padding: 2px 0;
+      background-color: white !important;
+      -webkit-box-shadow: 6px 6px 13px -9px rgba(0, 0, 0, 0.35);
+      -moz-box-shadow: 6px 6px 13px -9px rgba(0, 0, 0, 0.35);
+      box-shadow: 6px 6px 13px -9px rgba(0, 0, 0, 0.35);
+      margin-bottom: 1em;
+
+      input {
+        font-size: 1em !important;
+        font-weight: bold !important;
+        border: none !important;
+        border-radius: 13px !important;
+        box-shadow: none !important;
+        margin-bottom: 0;
+        background-color: transparent !important;
+        width: 100% !important;
+        &:focus {
+          outline: rgba(0, 0, 0, 0.158) solid 1.5px !important;
+        }
+      }
+    }
+    .dropdownContainer {
+      box-shadow: none !important;
+      border-top-left-radius: 13px !important;
+      border-bottom-left-radius: 13px !important;
+      * {
+        &:before {
+          outline: none !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+      }
+    }
+  }
+}

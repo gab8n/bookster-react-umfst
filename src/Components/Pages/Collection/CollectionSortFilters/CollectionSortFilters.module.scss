@@ -1,12 +1,43 @@
 .container {
   width: calc(100% - 2em);
   padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  .selectedFiltersContainer {
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .currentsFiltersText {
+      margin-right: 0.5em;
+      white-space: nowrap;
+    }
+    .selectedFilterText {
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 0.3em;
+      white-space: nowrap;
+      .icon {
+        color: #958ada;
+      }
+    }
+    .clearFiltersIcon {
+      color: #958ada;
+      margin-left: 0.5em;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+  }
   .dropdownContainer {
     display: flex;
     align-items: center;
+    margin-left: 2em;
     .sortText {
       margin: 0;
       margin-right: 0.5em;
+      white-space: nowrap;
     }
   }
 }

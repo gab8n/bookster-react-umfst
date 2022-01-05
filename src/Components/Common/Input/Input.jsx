@@ -5,7 +5,6 @@ const Input = ({
   name,
   placeholder,
   onChange,
-  onSubmit,
   className,
   value,
   disabled,
@@ -18,7 +17,6 @@ const Input = ({
       type={type ? type : ''}
       placeholder={placeholder && placeholder}
       onChange={(e) => onChange && onChange(e)}
-      onSubmit={(e) => onSubmit && onSubmit(e)}
       className={className ? `${inputStyle} ${className}` : inputStyle}
       disabled={disabled && disabled}
     />

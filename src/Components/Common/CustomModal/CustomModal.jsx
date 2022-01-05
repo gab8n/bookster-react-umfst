@@ -16,7 +16,7 @@ const customStyles = {
 };
 Modal.setAppElement('#root');
 
-const CustomModal = ({ modalButton, modalContent }) => {
+const CustomModal = ({ modalButton, modalContent, title }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -45,7 +45,7 @@ const CustomModal = ({ modalButton, modalContent }) => {
         overlayClassName={overlayStyle}
       >
         <div className={modalHeader}>
-          <h3 className={modalTitle}>Log In</h3>
+          <h3 className={modalTitle}>{title}</h3>
           <Button
             label="&#10006;"
             className={modalCloseButton}

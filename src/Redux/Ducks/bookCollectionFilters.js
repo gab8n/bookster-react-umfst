@@ -1,5 +1,4 @@
 import update from 'immutability-helper';
-// import update from 'react-addons-update';
 
 const GENRE = 'bookster-react-umfst/filters/genre';
 const AUTHOR = 'bookster-react-umfst/filters/author';
@@ -8,6 +7,9 @@ const PUBLISHER = 'bookster-react-umfst/filters/publisher';
 const CURRENTGENRE = 'bookster-react-umfst/filters/currentGenre';
 const CURRENTAUTHOR = 'bookster-react-umfst/filters/currentAuthor';
 const CURRENTPUBLISHER = 'bookster-react-umfst/filters/currentPublisher';
+
+const DEFAULTCURRENTFILTER =
+  'bookster-react-umfst/filters/defaultCurrentFilter';
 
 const DEFAULT = 'bookster-react-umfst/filters/default';
 
@@ -135,6 +137,34 @@ export default function reducer(state = initialState, action) {
           },
         },
       });
+    case DEFAULTCURRENTFILTER:
+      return update(state, {
+        options: {
+          genres: {
+            $apply: (genres) =>
+              genres.map((element) => {
+                return { option: element.option, value: false };
+              }),
+          },
+          authors: {
+            $apply: (authors) =>
+              authors.map((element) => {
+                return { option: element.option, value: false };
+              }),
+          },
+          publisher: {
+            $apply: (publisher) =>
+              publisher.map((element) => {
+                return { option: element.option, value: false };
+              }),
+          },
+        },
+        currentFilters: {
+          genres: { $set: [] },
+          authors: { $set: [] },
+          publisher: { $set: [] },
+        },
+      });
     case DEFAULT:
       return initialState;
 
@@ -153,7 +183,6 @@ export const setOptions = (data, type) => {
 };
 
 export const setFilters = (id, type) => {
-  console.log(id);
   return {
     type:
       type === 'AUTHOR'
@@ -162,6 +191,11 @@ export const setFilters = (id, type) => {
         ? CURRENTGENRE
         : CURRENTPUBLISHER,
     payload: id,
+  };
+};
+export const setDefault = () => {
+  return {
+    type: DEFAULTCURRENTFILTER,
   };
 };
 export const clearFilters = () => {

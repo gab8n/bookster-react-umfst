@@ -4,7 +4,6 @@ import Header from 'Components/Common/Header/Header';
 import SideNavigationBar from './SideNavigationBar/SideNavigationBar';
 import styles from './Account.module.scss';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from 'Services/firebaseAuth';
 import { toast } from 'react-toastify';
 import AccountSettings from './AccountSettings/AccountSettings';

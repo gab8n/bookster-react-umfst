@@ -78,7 +78,7 @@ const Collection = () => {
         <CollectionFilters />
         <div className={collectionContainer}>
           <CollectionSortFilters
-            {...{ sortOptions, defaultSortOption }}
+            {...{ sortOptions, defaultSortOption, filters }}
             onSelectOption={handleSortOptionChanged}
           />
           <div className={itemsContainer}>

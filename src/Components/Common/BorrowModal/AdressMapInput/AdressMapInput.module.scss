@@ -1,0 +1,30 @@
+.mapAdressContainer {
+  margin-bottom: 1em;
+
+  .adressInputContainer {
+    position: relative;
+    .input {
+      width: 90%;
+      margin-bottom: 0.2em;
+    }
+  }
+  .locationIcon {
+    position: absolute;
+    right: 0.8em;
+    top: 36%;
+    cursor: pointer;
+  }
+
+  .mapContainer {
+    overflow: hidden;
+    width: 100%;
+    height: 25vh;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #958ada;
+    border-width: 2px;
+    * {
+      margin: 0;
+    }
+  }
+}

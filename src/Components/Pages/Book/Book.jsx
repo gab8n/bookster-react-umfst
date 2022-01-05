@@ -12,6 +12,8 @@ import {
   addBookToWishlist,
   removeBookFromWishlist,
 } from 'Services/firebaseUserActions';
+import CustomModal from 'Components/Common/CustomModal/CustomModal';
+import BorrowModal from 'Components/Common/BorrowModal/BorrowModal';
 
 const Book = () => {
   const {
@@ -67,11 +69,20 @@ const Book = () => {
             <span className={bookGenres}>{book.genres?.toString()}</span>
           </label>
           <p className={bookDescription}>{book.description}</p>
-          <Button
-            className={borrowButton}
-            label={'BORROW'}
-            startAdorment={<FaShoppingCart className={borrowButtonAdorment} />}
+          <CustomModal
+            title={'Borrow'}
+            modalButton={
+              <Button
+                className={borrowButton}
+                label={'BORROW'}
+                startAdorment={
+                  <FaShoppingCart className={borrowButtonAdorment} />
+                }
+              />
+            }
+            modalContent={<BorrowModal />}
           />
+
           <Button
             className={wishlistButton}
             label={'WHISHIST'}

@@ -35,6 +35,22 @@ export const checkIfBookIsInWishlist = (
 export const updateStatusOfBook = (bookId, status) => {
   database.collection('books').doc(bookId).update({ status: status });
 };
+export const getUserBoorrowBookData = (userId, setUserBorrowBookData) => {
+  database
+    .collection('users')
+    .doc(userId)
+    .get()
+    .then((doc) => {
+      setUserBorrowBookData((prevState) => {
+        return {
+          ...prevState,
+          phone: doc.data().phone,
+          firstName: doc.data().givenName,
+          lastName: doc.data().familyName,
+        };
+      });
+    });
+};
 export const borrowBook = (bookId, userId) => {
   database
     .collection('books')

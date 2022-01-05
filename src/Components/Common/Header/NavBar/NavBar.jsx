@@ -44,6 +44,7 @@ const NavBar = () => {
           <UserIcon />
         ) : (
           <CustomModal
+            title={modalType}
             modalButton={
               <Button
                 label="Login"
