@@ -10,7 +10,12 @@ const UserProfilePicture = ({ photoURL }) => {
     <CustomModal
       modalButton={
         <div className={container}>
-          <img className={imageStyle} src={photoURL} alt="user profile" />
+          <img
+            className={imageStyle}
+            src={photoURL}
+            alt="user profile"
+            referrerPolicy="no-referrer"
+          />
         </div>
       }
       modalContent={<ChangeProfilePictureModal {...{ photoURL }} />}

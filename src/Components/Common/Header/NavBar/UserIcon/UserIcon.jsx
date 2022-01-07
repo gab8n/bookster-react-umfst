@@ -49,6 +49,7 @@ const UserIcon = () => {
           src={userProfilePicture ? userProfilePicture : userAvatar}
           className={userIconStyle}
           alt="user icon"
+          referrerPolicy="no-referrer"
         />
         <div
           className={

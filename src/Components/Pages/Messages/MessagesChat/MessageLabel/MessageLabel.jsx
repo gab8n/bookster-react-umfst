@@ -18,7 +18,12 @@ const MessageLabel = ({ photoURL, isContactMessage, message }) => {
           : `${messageContainer} ${leftContainer}`
       }
     >
-      <img className={profilePicture} src={photoURL} alt="user" />
+      <img
+        className={profilePicture}
+        src={photoURL}
+        alt="user"
+        referrerPolicy="no-referrer"
+      />
       <div
         className={
           !isContactMessage

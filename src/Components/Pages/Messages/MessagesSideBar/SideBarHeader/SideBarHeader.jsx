@@ -7,7 +7,12 @@ const SideBarHeader = ({ photoURL, onClick, addContactState }) => {
   return (
     <div className={container}>
       <div className={titlePhotoContainer}>
-        <img className={thumbnail} src={photoURL} alt="user" />
+        <img
+          className={thumbnail}
+          src={photoURL}
+          alt="user"
+          referrerPolicy="no-referrer"
+        />
         <h2 className={title}>Conversations</h2>
       </div>
       {addContactState ? (
