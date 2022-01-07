@@ -14,6 +14,7 @@ import {
 } from 'Services/firebaseUserActions';
 import CustomModal from 'Components/Common/CustomModal/CustomModal';
 import BorrowModal from 'Components/Common/BorrowModal/BorrowModal';
+import BookComments from './BookComments/BookComments';
 
 const Book = () => {
   const {
@@ -34,10 +35,12 @@ const Book = () => {
     bookGenresContainer,
     bookGenres,
     ratingContainer,
+    bookDataContainer,
   } = styles;
 
   const { id } = useParams();
-  const userId = useSelector((state) => state.authStore.userData.uid);
+  const authStore = useSelector((state) => state.authStore);
+  const userId = authStore.userData.uid;
 
   const [book, setBook] = useState({});
   const [isInWishlist, setIsInWishlist] = useState(false);
@@ -51,49 +54,52 @@ const Book = () => {
     <div className={pageContainer}>
       <Header title={'COLLECTION'} navBarOnly={true} />
       <main className={mainContainer}>
-        <img src={book.thumbnail} alt={book.title} className={image} />
-        <div className={dataContainer}>
-          <h1 className={bookTitle}>{book.title}</h1>
-          <div className={ratingContainer}>
-            <FeedbackStars score={3} count={100} />
-          </div>
-          <label className={bookAuthorsContainer}>
-            AUTOR:{' '}
-            <span className={bookAuthors}>{book.authors?.toString()}</span>
-          </label>
-          <label className={bookPublisherContainer}>
-            PUBLISHER: <span className={bookPublisher}>{book.publisher}</span>
-          </label>
-          <label className={bookGenresContainer}>
-            GENRES:{' '}
-            <span className={bookGenres}>{book.genres?.toString()}</span>
-          </label>
-          <p className={bookDescription}>{book.description}</p>
-          <CustomModal
-            title={'Borrow'}
-            modalButton={
-              <Button
-                className={borrowButton}
-                label={'BORROW'}
-                startAdorment={
-                  <FaShoppingCart className={borrowButtonAdorment} />
-                }
-              />
-            }
-            modalContent={<BorrowModal />}
-          />
+        <div className={bookDataContainer}>
+          <img src={book.thumbnail} alt={book.title} className={image} />
+          <div className={dataContainer}>
+            <h1 className={bookTitle}>{book.title}</h1>
+            <div className={ratingContainer}>
+              <FeedbackStars score={3} count={100} />
+            </div>
+            <label className={bookAuthorsContainer}>
+              AUTOR:{' '}
+              <span className={bookAuthors}>{book.authors?.toString()}</span>
+            </label>
+            <label className={bookPublisherContainer}>
+              PUBLISHER: <span className={bookPublisher}>{book.publisher}</span>
+            </label>
+            <label className={bookGenresContainer}>
+              GENRES:{' '}
+              <span className={bookGenres}>{book.genres?.toString()}</span>
+            </label>
+            <p className={bookDescription}>{book.description}</p>
+            <CustomModal
+              title={'Borrow'}
+              modalButton={
+                <Button
+                  className={borrowButton}
+                  label={'BORROW'}
+                  startAdorment={
+                    <FaShoppingCart className={borrowButtonAdorment} />
+                  }
+                />
+              }
+              modalContent={<BorrowModal bookId={id} />}
+            />
 
-          <Button
-            className={wishlistButton}
-            label={'WHISHIST'}
-            startAdorment={<FaRegHeart className={wishlistButtonAdorment} />}
-            onClick={() =>
-              isInWishlist
-                ? removeBookFromWishlist(id, userId)
-                : addBookToWishlist(id, userId)
-            }
-          />
+            <Button
+              className={wishlistButton}
+              label={'WHISHIST'}
+              startAdorment={<FaRegHeart className={wishlistButtonAdorment} />}
+              onClick={() =>
+                isInWishlist
+                  ? removeBookFromWishlist(id, userId)
+                  : addBookToWishlist(id, userId)
+              }
+            />
+          </div>
         </div>
+        <BookComments {...{ authStore }} bookId={id} />
       </main>
     </div>
   );

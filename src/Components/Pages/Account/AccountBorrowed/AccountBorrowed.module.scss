@@ -1,0 +1,102 @@
+.container {
+  width: calc(100% - 10em);
+  padding: 3em 5em;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 6em);
+  overflow-y: scroll;
+  .title {
+    font-size: 2em;
+    margin-bottom: 1.5em;
+    margin-top: -0.5em;
+  }
+  .orderContainer {
+    width: calc(100% - 2em);
+    margin-bottom: 2em;
+    border-radius: 13px;
+    outline: 3px solid #958ada;
+    padding: 1em;
+    .lineStatusContainer {
+      width: 100%;
+      height: 5em;
+      display: flex;
+      .statusContainer {
+        width: 16.6%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3.5em;
+        border-bottom: solid 0.15em gray;
+        color: gray;
+        padding-bottom: 0.1em;
+        .iconContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .statusText {
+            font-size: 0.3em;
+          }
+        }
+      }
+      .statusActive {
+        border-bottom: solid 0.15em #958ada !important;
+        color: #958ada !important;
+      }
+    }
+    .orderDataContainer {
+      width: 100%;
+      height: 7.5em;
+      margin-top: 1.5em;
+      display: flex;
+      justify-content: space-evenly;
+      .bookCoverContainer {
+        display: flex;
+        padding-right: 1em;
+        .orderNumberText {
+          font-size: 1em;
+          font-weight: bold;
+          margin-top: 0.5em;
+        }
+        .bookCoverLink {
+          display: flex;
+        }
+        .bookCover {
+          border-radius: 13px;
+          cursor: pointer;
+          margin-right: 1em;
+        }
+      }
+      .adressDataContainer {
+        padding-left: 1em;
+        margin-top: 0.3em;
+        font-weight: bold;
+        font-size: 1em;
+        display: flex;
+        flex-direction: column;
+        .adressDataText {
+          font-size: 1.2em;
+          margin-bottom: 0.2em;
+        }
+        border-left: solid 1px #958ada;
+        padding-right: 1em;
+      }
+      .userDataContainer {
+        padding-left: 1em;
+        margin-top: 0.3em;
+        font-weight: bold;
+        font-size: 1em;
+        display: flex;
+        flex-direction: column;
+        border-left: solid 1px #958ada;
+        .userDataText {
+          font-size: 1.2em;
+          margin-bottom: 0.2em;
+        }
+      }
+    }
+  }
+  .purpleText {
+    color: #958ada;
+  }
+}

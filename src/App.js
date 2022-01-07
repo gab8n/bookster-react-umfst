@@ -7,7 +7,13 @@ import Contact from 'Components/Pages/Contact/Contact';
 import Book from 'Components/Pages/Book/Book';
 import Page404 from 'Components/Pages/Page404/Page404';
 import Messages from 'Components/Pages/Messages/Messages';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Admin from 'Components/Pages/Admin/Admin';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { useEffect } from 'react';
 import { populateDbWithUsers } from 'Services/firebaseAuth';
 import {
@@ -15,11 +21,52 @@ import {
   getBooksAll,
   addBooksToBooksTest,
 } from 'Services/firebaseBooks';
+import { useSelector, useDispatch } from 'react-redux';
 function App() {
   useEffect(() => {
     // getBooksAll();
     // addBooksToBooksTest();
   }, []);
+  const authStore = useSelector((state) => state.authStore);
+  const PrivateRoute = ({ children, ...rest }) => {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          authStore.loggedIn ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/',
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
+  const PrivateAdminRoute = ({ children, ...rest }) => {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          authStore.loggedIn &&
+          authStore.userData.email === 'administrator@yahoo.com' ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/',
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
   return (
     <Router>
       <Switch>
@@ -27,7 +74,12 @@ function App() {
         <Route path="/aboutus" component={AboutUs} exact={true}></Route>
         <Route path="/faq" component={Faq} exact={true}></Route>
         <Route path="/contact" component={Contact} exact={true}></Route>
-        <Route path="/account/:subpage" component={Account}></Route>
+        <PrivateRoute path="/account/:subpage">
+          <Account />
+        </PrivateRoute>
+        <PrivateAdminRoute path="/admin/:subpage">
+          <Admin />
+        </PrivateAdminRoute>
         <Route path="/messages" component={Messages} exact={true}></Route>
         <Route path="/collection" component={Collection}></Route>
         <Route path="/book/:id" component={Book}></Route>

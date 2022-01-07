@@ -1,0 +1,31 @@
+.container {
+  width: calc(100% - 2em);
+  padding: 0 1em;
+  height: 4.6em;
+  background-color: #958ada;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+    .icon {
+      font-size: 3em;
+    }
+  }
+  .navContainer {
+    display: flex;
+    align-items: center;
+    .link {
+      text-decoration: none;
+      color: black;
+      font-size: 1.5em;
+      margin-right: 1em;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}

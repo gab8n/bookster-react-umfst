@@ -16,7 +16,7 @@ export const getConversations = (userId, searchedName, setData) => {
     .collection('userMessages')
     .doc(userId)
     .collection('conversations')
-    .orderBy('editedTime');
+    .orderBy('editedTime', 'desc');
   const userData = database.collection('users');
   setData([]);
 

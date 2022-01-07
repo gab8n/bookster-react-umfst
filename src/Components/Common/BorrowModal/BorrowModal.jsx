@@ -5,10 +5,14 @@ import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/bootstrap.css';
 import AdressMapInput from './AdressMapInput/AdressMapInput';
-import { getUserBoorrowBookData } from 'Services/firebaseUserActions';
+import {
+  getUserBoorrowBookData,
+  createBorrowRequest,
+} from 'Services/firebaseUserActions';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
-const BorrowModal = () => {
+const BorrowModal = ({ bookId }) => {
   const userData = useSelector((state) => state.authStore.userData);
   const {
     modalContent,
@@ -31,10 +35,36 @@ const BorrowModal = () => {
     zipCode: '',
     state: '',
   });
+  const handleError = (error) => {
+    toast.error(error);
+  };
+  const handleSuccess = (message) => {
+    toast.success(message);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      userInfo.phone.length === 0 ||
+      userInfo.city.length === 0 ||
+      userInfo.streetAddress.length === 0 ||
+      userInfo.zipCode.length === 0 ||
+      userInfo.state.length === 0
+    ) {
+      toast.error('Please fill all the fields');
+    } else {
+      createBorrowRequest(
+        bookId,
+        userData.uid,
+        userInfo,
+        handleError,
+        handleSuccess
+      );
+    }
+  };
 
   return (
     <div className={modalContent}>
-      <form className={modalForm}>
+      <form className={modalForm} onSubmit={(e) => handleSubmit(e)}>
         <div className={twoElementsOnRow}>
           <Input
             placeholder="First Name"

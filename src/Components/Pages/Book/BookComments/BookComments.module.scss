@@ -1,0 +1,94 @@
+@import 'lib/mixins.scss';
+.container {
+  width: calc(100% - 10em);
+  padding: 0 5em;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  .commentsTitle {
+    font-size: 1.5em;
+    margin-bottom: 2em;
+  }
+  .profilePic {
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    outline: solid 1px #958ada;
+    margin-right: 1em;
+  }
+  .addCommentContainer {
+    width: 80%;
+    display: flex;
+    position: relative;
+    margin-bottom: 4em;
+    .textarea {
+      width: 100%;
+      padding: 0.8em 1.3em;
+      border-radius: 13px;
+      border: none;
+      @include shadowMixin($shadowForInput);
+      font-size: 1em;
+      font-weight: bold;
+      outline-color: #958ada;
+      outline-style: solid;
+      outline-width: 1.5px;
+      resize: none;
+      &:focus {
+        outline-color: #958ada;
+        outline-style: solid;
+        outline-width: 2px;
+      }
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+    .button {
+      position: absolute;
+      bottom: -3.8em;
+      right: 0;
+      border-radius: 13px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #303030;
+      color: #e5e5e5;
+      padding: 0.8em 1em;
+      &:hover {
+        background-color: #1f1f1f;
+      }
+    }
+  }
+
+  .commentsContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    .userPhotoContainer {
+      display: flex;
+      .profilePic {
+        width: 2.5em;
+        height: 2.5em;
+        margin-right: 0.7em;
+      }
+      .deleteCommentIcon {
+        cursor: pointer;
+        color: #958ada;
+        margin-left: 0.5em;
+      }
+    }
+
+    .commentContainer {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2em;
+      width: 70%;
+      min-width: 500px;
+      .commentUsername {
+        margin: 0;
+        padding: 0.2em 0;
+        font-size: 1.1em;
+        white-space: nowrap;
+      }
+    }
+  }
+}
