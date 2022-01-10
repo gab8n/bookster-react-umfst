@@ -46,16 +46,18 @@ const MultiselectFilter = ({ title, options, onChange }) => {
             <div {...props} style={{ display: 'none' }} />
           )}
         >
-          {options?.map((element, index) => {
-            return (
-              <CheckBox
-                name={element.option}
-                onChange={() => onChange(index)}
-                isChecked={options[index].value}
-                label={element.option}
-              />
-            );
-          })}
+          {options
+            ?.sort((a, b) => (a.option < b.option ? -1 : 1))
+            .map((element, index) => {
+              return (
+                <CheckBox
+                  name={element.option}
+                  onChange={() => onChange(index)}
+                  isChecked={options[index].value}
+                  label={element.option}
+                />
+              );
+            })}
         </Scrollbars>
       </div>
     </div>

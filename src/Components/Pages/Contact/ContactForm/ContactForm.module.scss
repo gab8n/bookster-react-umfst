@@ -1,0 +1,82 @@
+@import 'lib/mixins.scss';
+.emailContactContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .titleContainer {
+    width: 80%;
+    .emailContactTitle {
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+  }
+
+  .emailContactForm {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    .emailInputContainer {
+      display: flex;
+      flex-direction: column;
+      width: 48%;
+    }
+    .messageTextareaContainer {
+      display: flex;
+      width: 48%;
+      position: relative;
+      .submitButton {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        border-radius: 13px;
+        font-size: 1em;
+        outline: none;
+        border: none;
+        background-color: #303030;
+        color: #e5e5e5;
+        cursor: pointer;
+        &:hover {
+          background-color: #1f1f1f;
+        }
+        padding: 0.7em 1em;
+      }
+    }
+
+    .inputEmailContact {
+      outline: solid 1px #958ada;
+      background-color: #958ada1e;
+
+      &:focus {
+        outline-color: #958ada;
+        outline-style: solid;
+        outline-width: 2px;
+      }
+      margin-bottom: 1em;
+    }
+    .textareaEmailContact {
+      width: 100%;
+      padding: 0.8em 1.3em;
+      border-radius: 13px;
+      border: none;
+      @include shadowMixin($shadowForInput);
+      font-size: 1em;
+      font-weight: bold;
+      outline-color: #958ada;
+      outline-style: solid;
+      outline-width: 1.5px;
+      resize: none;
+      margin-bottom: 1em;
+      background-color: #958ada1e;
+      &:focus {
+        outline-color: #958ada;
+        outline-style: solid;
+        outline-width: 2px;
+      }
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+  }
+}

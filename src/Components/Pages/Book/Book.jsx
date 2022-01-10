@@ -11,6 +11,7 @@ import {
   checkIfBookIsInWishlist,
   addBookToWishlist,
   removeBookFromWishlist,
+  addRatingToBook,
 } from 'Services/firebaseUserActions';
 import CustomModal from 'Components/Common/CustomModal/CustomModal';
 import BorrowModal from 'Components/Common/BorrowModal/BorrowModal';
@@ -49,6 +50,24 @@ const Book = () => {
     getBook(id, setBook);
     checkIfBookIsInWishlist(id, userId, setIsInWishlist);
   }, []);
+  const handleChangeRating = (newRating) => {
+    const isFirstRating =
+      book.ratingList?.filter((element) => element.id === userId).length > 0
+        ? false
+        : true;
+    const oldRating = book.ratingList?.find(
+      (element) => element.id === userId
+    )?.rating;
+    addRatingToBook(
+      id,
+      userId,
+      newRating,
+      isFirstRating,
+      book.rating,
+      book.ratingCount,
+      oldRating
+    );
+  };
 
   return (
     <div className={pageContainer}>
@@ -59,7 +78,15 @@ const Book = () => {
           <div className={dataContainer}>
             <h1 className={bookTitle}>{book.title}</h1>
             <div className={ratingContainer}>
-              <FeedbackStars score={3} count={100} />
+              <FeedbackStars
+                score={book.rating}
+                count={book.ratingCount}
+                userRating={
+                  book.ratingList?.find((element) => element.id === userId)
+                    ?.rating
+                }
+                setNewRating={handleChangeRating}
+              />
             </div>
             <label className={bookAuthorsContainer}>
               AUTOR:{' '}

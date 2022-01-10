@@ -1,10 +1,20 @@
 import { HiStar } from 'react-icons/hi';
 import styles from './FeedbackStars.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const FeedbackStars = ({ disabled, score, count }) => {
-  const [rating, setRating] = useState(score);
+const FeedbackStars = ({
+  disabled,
+  score,
+  count,
+  userRating,
+  setNewRating,
+}) => {
+  // console.log(userRating);
+  const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  useEffect(() => {
+    setRating(userRating);
+  }, [userRating]);
 
   const { on, off, starStyle, container, button, scoreStyle, starsContainer } =
     styles;
@@ -22,7 +32,7 @@ const FeedbackStars = ({ disabled, score, count }) => {
                   ? `${button} ${on}`
                   : `${button} ${off}`
               }
-              onClick={() => setRating(index)}
+              onClick={() => setNewRating(index)}
               onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setHover(rating)}
             >
@@ -31,7 +41,7 @@ const FeedbackStars = ({ disabled, score, count }) => {
           );
         })}
       </div>
-      <span className={scoreStyle}>{rating.toFixed(2)}</span>
+      <span className={scoreStyle}>{score}</span>
       <span className={scoreStyle}>{'( ' + count + ' )'}</span>
     </div>
   );

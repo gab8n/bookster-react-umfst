@@ -3,18 +3,18 @@ import firebase from 'utils/firebaseConfig';
 export const database = firebase.firestore();
 
 export const addBookToCollection = (bookData, handleSuccess, handleError) => {
+  console.log('working');
   database
     .collection('books')
     .doc()
     .set({
       ...bookData,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
       handleSuccess();
     })
     .catch((error) => {
-      handleError(error.message);
+      handleError(error);
     });
 };
 export const getBooks = (
@@ -27,9 +27,8 @@ export const getBooks = (
 ) => {
   const { genres, authors, publisher } = filters;
 
-  let bookCollection = database
-    .collection('books')
-    .where('status', '==', 'aviable');
+  let bookCollection = database.collection('books');
+
   bookCollection =
     genres.length !== 0
       ? bookCollection.where('genres', 'array-contains-any', genres)
@@ -42,6 +41,7 @@ export const getBooks = (
     publisher.length !== 0
       ? bookCollection.where('publisher', 'in', publisher)
       : bookCollection;
+  bookCollection = bookCollection.where('aviable', '==', true);
   bookCollection = search
     ? bookCollection
         .where('title', '>=', search)
@@ -109,11 +109,12 @@ export const getBook = (id, setBook) => {
 };
 
 export const addBookFilter = (filter, type, handleSuccess, handleError) => {
-  console.log(type, filter);
   const document = database.collection('bookFilters').doc(type);
-
+  // console.log(filter);
   document.get().then((querySnapshot) => {
     if (querySnapshot.data()[type].includes(filter)) {
+      // console.log(filter);
+      // console.log(querySnapshot.data());
       console.log('already exists');
     } else {
       document
@@ -122,11 +123,12 @@ export const addBookFilter = (filter, type, handleSuccess, handleError) => {
         })
         .then(() => {
           // handleSuccess();
-          console.log('adaugat teoretic');
+          console.log('filter added');
         })
         .catch((error) => {
           // handleError(error.message);
-          console.log(error.message);
+          console.log('filter not added');
+          console.log(error);
         });
     }
   });

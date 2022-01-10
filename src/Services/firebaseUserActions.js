@@ -131,3 +131,53 @@ export const getUserOrders = (userId, setUserBorrowedBooks) => {
       setUserBorrowedBooks(data);
     });
 };
+
+export const addRatingToBook = (
+  bookId,
+  userId,
+  bookRating,
+  isFirstRating,
+  overallRating,
+  ratingCount,
+  oldRating
+) => {
+  const newRating = (
+    (overallRating * ratingCount + bookRating) /
+    (ratingCount + 1)
+  ).toFixed(2);
+  if (isFirstRating) {
+    database
+      .collection('books')
+      .doc(bookId)
+      .update({
+        rating: newRating,
+        ratingCount: ratingCount + 1,
+        ratingList: firebase.firestore.FieldValue.arrayUnion({
+          id: userId,
+          rating: bookRating,
+        }),
+      });
+  } else {
+    database
+      .collection('books')
+      .doc(bookId)
+      .update({
+        rating: newRating,
+        ratingList: firebase.firestore.FieldValue.arrayRemove({
+          id: userId,
+          rating: oldRating,
+        }),
+      })
+      .then(() => {
+        database
+          .collection('books')
+          .doc(bookId)
+          .update({
+            ratingList: firebase.firestore.FieldValue.arrayUnion({
+              id: userId,
+              rating: bookRating,
+            }),
+          });
+      });
+  }
+};

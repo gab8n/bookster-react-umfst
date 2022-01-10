@@ -1,5 +1,10 @@
+import CSVUpload from 'Components/CSVUpload/CSVUpload';
 const AdminBooks = () => {
-  return <div>AdminBooks</div>;
+  return (
+    <div>
+      <CSVUpload />
+    </div>
+  );
 };
 
 export default AdminBooks;
