@@ -72,7 +72,8 @@ function App() {
       <Switch>
         <Route path="/collection" component={Collection} exact={false}></Route>
         <Route path="/aboutus" component={AboutUs} exact={true}></Route>
-        <Route path="/faq" component={Faq} exact={true}></Route>
+        <Route path="/faq/:subpage" component={Faq}></Route>
+        <Route path="/faq" component={Faq}></Route>
         <Route path="/contact" component={Contact} exact={true}></Route>
         <PrivateRoute path="/account/:subpage">
           <Account />

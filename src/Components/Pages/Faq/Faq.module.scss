@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  .contentContainer {
+    width: 100%;
+    display: flex;
+    margin-top: 10em;
+    .itemsContainer {
+    }
+    .boxesContainer {
+      width: 100%;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .boxContainer {
+        height: 4em;
+        width: 7em;
+        padding: 2em;
+        border: 2px solid #958ada;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        * {
+          text-decoration: none;
+        }
+        .boxLink {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+        .boxText {
+          font-size: 1em;
+          color: #958ada;
+          font-weight: bold;
+          white-space: nowrap;
+        }
+        .boxIcon {
+          font-size: 2em;
+          color: #958ada;
+        }
+      }
+    }
+  }
+}

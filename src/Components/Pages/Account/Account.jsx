@@ -1,6 +1,5 @@
 import Header from 'Components/Common/Header/Header';
 
-// import headerLogo from 'assets/headerImages/accountPageLogo.svg';
 import SideNavigationBar from './SideNavigationBar/SideNavigationBar';
 import styles from './Account.module.scss';
 import { useState, useEffect } from 'react';

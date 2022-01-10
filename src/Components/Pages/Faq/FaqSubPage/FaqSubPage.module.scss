@@ -1,0 +1,22 @@
+.faqSubPageContent {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10em;
+
+  .faqSubPageTitle {
+    white-space: pre-wrap;
+  }
+
+  .paragraphContainer {
+    margin-bottom: 60px;
+    margin-left: 100px;
+
+    .faqSubPageParagraphText {
+      white-space: pre-wrap;
+    }
+
+    .faqSubPageParagraphTitle {
+      white-space: pre-wrap;
+    }
+  }
+}
