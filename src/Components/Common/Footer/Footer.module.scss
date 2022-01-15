@@ -1,0 +1,22 @@
+.container {
+  width: calc(100% - 4em);
+  height: 4.6em;
+  background-color: #958ada;
+  margin-top: 5em;
+  display: flex;
+  align-items: center;
+  padding: 0 2em;
+  .copyright {
+    align-self: center;
+    color: white;
+    margin: 0 auto;
+  }
+  .iconsContainer {
+    display: flex;
+    .icon {
+      font-size: 2em;
+      margin-left: 0.5em;
+      cursor: pointer;
+    }
+  }
+}

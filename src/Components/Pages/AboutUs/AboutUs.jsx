@@ -4,6 +4,7 @@ import headerLogo from 'assets/headerImages/aboutUsPageLogo.svg';
 import RoadToKnowledge from 'Components/Pages/AboutUs/RoadToKnowledge/RoadToKnowledge';
 import AboutUsIntro from './AboutUsIntro/AboutUsIntro';
 import AboutUsCounter from './AboutUsCounter/AboutUsCounter';
+import Footer from 'Components/Common/Footer/Footer';
 
 const AboutUs = () => {
   const { aboutUsContainer, subheader } = styles;
@@ -15,6 +16,7 @@ const AboutUs = () => {
         <AboutUsCounter />
       </div>
       <RoadToKnowledge />
+      <Footer />
     </div>
   );
 };

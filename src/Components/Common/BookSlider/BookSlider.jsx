@@ -1,7 +1,6 @@
 import styles from './BookSlider.module.scss';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getBooksForSlider } from 'Services/firebaseBooks';
 import Slider from 'react-slick';
 import SlideCard from './SlideCard/SlideCard';
 import { Link } from 'react-router-dom';
@@ -14,13 +13,8 @@ import {
   MdOutlineKeyboardArrowRight,
 } from 'react-icons/md';
 
-const BookSlider = ({ title }) => {
-  const [books, setBooks] = useState([]);
+const BookSlider = ({ title, books }) => {
   const [draggable, setDraggable] = useState(false);
-
-  useEffect(() => {
-    getBooksForSlider(setBooks);
-  }, []);
 
   const {
     container,

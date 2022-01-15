@@ -9,6 +9,7 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { ImBoxRemove } from 'react-icons/im';
 import { FaUserAlt } from 'react-icons/fa';
 import FaqSubPage from './FaqSubPage/FaqSubPage';
+import Footer from 'Components/Common/Footer/Footer';
 
 const Faq = () => {
   const {
@@ -90,6 +91,7 @@ const Faq = () => {
       ) : (
         <FaqSubPage {...{ subpage }} />
       )}
+      <Footer />
     </div>
   );
 };

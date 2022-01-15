@@ -11,7 +11,6 @@ const {
   additionalInfo,
   info,
   infoContainerTitle,
-  directionButton,
   streetAdressInfo,
   infoText,
   infoIcon,
@@ -77,9 +76,9 @@ const ContactInfo = () => {
           <div className={info}>
             <FaMapMarkerAlt className={infoIcon} />
             <h4 className={infoText}>
-              Biblioteca Județeană Mureș
+              Biblioteca UMFST Mureș
               <p className={streetAdressInfo}>
-                Strada George Enescu 2,
+                Strada Gheorghe Marinescu 38,
                 <br /> Târgu Mureș
               </p>
             </h4>
@@ -91,13 +90,12 @@ const ContactInfo = () => {
             </div>
             <div className={info}>
               <FaEnvelope className={infoIcon} />
-              <h4 className={infoText}>booksterendava@gmail.com</h4>
+              <h4 className={infoText}>booksterUmfst@gmail.com</h4>
             </div>
           </div>
         </div>
         <Button
           label={'GET DIRECTIONS'}
-          // className={directionButton}
           onClick={() => openMapOnLocation(location.lat, location.lng)}
         />
       </div>

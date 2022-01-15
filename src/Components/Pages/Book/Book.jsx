@@ -16,6 +16,8 @@ import {
 import CustomModal from 'Components/Common/CustomModal/CustomModal';
 import BorrowModal from 'Components/Common/BorrowModal/BorrowModal';
 import BookComments from './BookComments/BookComments';
+import Footer from 'Components/Common/Footer/Footer';
+import { toast } from 'react-toastify';
 
 const Book = () => {
   const {
@@ -48,25 +50,31 @@ const Book = () => {
 
   useEffect(() => {
     getBook(id, setBook);
-    checkIfBookIsInWishlist(id, userId, setIsInWishlist);
+    if (authStore.loggedIn) {
+      checkIfBookIsInWishlist(id, userId, setIsInWishlist);
+    }
   }, []);
   const handleChangeRating = (newRating) => {
-    const isFirstRating =
-      book.ratingList?.filter((element) => element.id === userId).length > 0
-        ? false
-        : true;
-    const oldRating = book.ratingList?.find(
-      (element) => element.id === userId
-    )?.rating;
-    addRatingToBook(
-      id,
-      userId,
-      newRating,
-      isFirstRating,
-      book.rating,
-      book.ratingCount,
-      oldRating
-    );
+    if (authStore.loggedIn) {
+      const isFirstRating =
+        book.ratingList?.filter((element) => element.id === userId).length > 0
+          ? false
+          : true;
+      const oldRating = book.ratingList?.find(
+        (element) => element.id === userId
+      )?.rating;
+      addRatingToBook(
+        id,
+        userId,
+        newRating,
+        isFirstRating,
+        book.rating,
+        book.ratingCount,
+        oldRating
+      );
+    } else {
+      toast.error('You must be logged in to rate a book');
+    }
   };
 
   return (
@@ -100,34 +108,48 @@ const Book = () => {
               <span className={bookGenres}>{book.genres?.toString()}</span>
             </label>
             <p className={bookDescription}>{book.description}</p>
-            <CustomModal
-              title={'Borrow'}
-              modalButton={
-                <Button
-                  className={borrowButton}
-                  label={'BORROW'}
-                  startAdorment={
-                    <FaShoppingCart className={borrowButtonAdorment} />
-                  }
-                />
-              }
-              modalContent={<BorrowModal bookId={id} />}
-            />
-
-            <Button
-              className={wishlistButton}
-              label={'WHISHIST'}
-              startAdorment={<FaRegHeart className={wishlistButtonAdorment} />}
-              onClick={() =>
-                isInWishlist
-                  ? removeBookFromWishlist(id, userId)
-                  : addBookToWishlist(id, userId)
-              }
-            />
+            {authStore.loggedIn ? (
+              <CustomModal
+                title={'Borrow'}
+                modalButton={
+                  <Button
+                    className={borrowButton}
+                    label={'BORROW'}
+                    startAdorment={
+                      <FaShoppingCart className={borrowButtonAdorment} />
+                    }
+                  />
+                }
+                modalContent={<BorrowModal bookId={id} />}
+              />
+            ) : (
+              <></>
+            )}
+            {authStore.loggedIn ? (
+              <Button
+                className={wishlistButton}
+                label={'WHISHIST'}
+                startAdorment={
+                  <FaRegHeart className={wishlistButtonAdorment} />
+                }
+                onClick={() =>
+                  isInWishlist
+                    ? removeBookFromWishlist(id, userId)
+                    : addBookToWishlist(id, userId)
+                }
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
-        <BookComments {...{ authStore }} bookId={id} />
+        {authStore.loggedIn ? (
+          <BookComments {...{ authStore }} bookId={id} />
+        ) : (
+          <></>
+        )}
       </main>
+      <Footer />
     </div>
   );
 };

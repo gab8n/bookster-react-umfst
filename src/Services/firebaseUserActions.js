@@ -1,4 +1,5 @@
 import firebase from 'utils/firebaseConfig';
+import axios from 'axios';
 
 export const auth = firebase.auth();
 export const database = firebase.firestore();
@@ -49,6 +50,22 @@ export const removeBookFromWishlist = (bookId, userId) => {
     .doc(userId)
     .update({ wishlist: firebase.firestore.FieldValue.arrayRemove(bookId) });
 };
+export const getWishlistBooks = (booksArray, setWishilst) => {
+  setWishilst([]);
+  booksArray.forEach((book) => {
+    database
+      .collection('books')
+      .doc(book)
+      .get()
+      .then((doc) => {
+        console.log(doc.data());
+        setWishilst((prevState) => [
+          ...prevState,
+          { ...doc.data(), id: doc.id },
+        ]);
+      });
+  });
+};
 export const checkIfBookIsInWishlist = (
   bookId,
   userId,
@@ -95,7 +112,7 @@ export const createBorrowRequest = (
     .doc(bookId)
     .get()
     .then((doc) => {
-      if (doc.data().available === true) {
+      if (doc.data().aviable === true) {
         database
           .collection('orders')
           .doc()
@@ -113,6 +130,14 @@ export const createBorrowRequest = (
               .doc(bookId)
               .update({ available: false });
             handleSuccess('Your request has been sent');
+            //aici ar trebui sa trimita un email cu detaliile
+            axios
+              .get(
+                `http://127.0.0.1:5000/api/bookRecomandation/?book_id=${bookId}&user_id=${userId}`
+              )
+              .then((res) => {
+                console.log(res.data);
+              });
           });
       } else {
         handleError('Book is not aviable');

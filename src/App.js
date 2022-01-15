@@ -20,12 +20,14 @@ import {
   setAllBooksStatusToAviable,
   getBooksAll,
   addBooksToBooksTest,
+  repairAllBooksFeedback,
 } from 'Services/firebaseBooks';
 import { useSelector, useDispatch } from 'react-redux';
 function App() {
   useEffect(() => {
     // getBooksAll();
     // addBooksToBooksTest();
+    // repairAllBooksFeedback();
   }, []);
   const authStore = useSelector((state) => state.authStore);
   const PrivateRoute = ({ children, ...rest }) => {

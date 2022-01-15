@@ -67,8 +67,6 @@ const MessagesChat = ({ userData, talkingContact, socket }) => {
     }
   };
   const handleReceiveMessage = (message) => {
-    console.log('message', message);
-    console.log('keys', keys);
     const decryptedMessage = decryptString(message, keys.privateKey);
 
     setNewAddedMessages((prevArray) => [

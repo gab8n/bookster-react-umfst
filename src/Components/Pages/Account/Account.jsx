@@ -42,7 +42,7 @@ const Account = () => {
           {subpage === 'profile' ? (
             <AccountSettings {...{ userAccountData }} />
           ) : subpage === 'wishlist' ? (
-            <AccountWishlist />
+            <AccountWishlist {...{ userAccountData }} />
           ) : subpage === 'borrowed' ? (
             <AccountBorrowed />
           ) : subpage === 'security' ? (

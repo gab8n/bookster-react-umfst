@@ -1,0 +1,39 @@
+.container {
+  padding: 2em;
+  overflow-y: scroll;
+  height: calc(100% - 4.6em);
+  // display: flex;
+  .booksContainer {
+    display: flex;
+  }
+  .whishlistTitle {
+    font-size: 2em;
+  }
+  .bookContainer {
+    margin: 1em;
+    .image {
+      width: 15em;
+      height: 23em;
+      margin-bottom: 1em;
+    }
+    .buttonsContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .button {
+      }
+      .icon {
+        font-size: 2em;
+        background-color: #303030;
+        color: #e5e5e5;
+        border-radius: 13px;
+        padding: 0.4em;
+        cursor: pointer;
+        margin-left: 0.5em;
+        &:hover {
+          background-color: #1f1f1f;
+        }
+      }
+    }
+  }
+}

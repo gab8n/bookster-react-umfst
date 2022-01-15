@@ -75,24 +75,59 @@ export const getBooks = (
       console.log('Error getting documents: ', error);
     });
 };
-export const getBooksForSlider = (setBooksList) => {
+export const getBooksForSlider = (setBooksList, userId) => {
   let bookCollection = database
     .collection('books')
     .orderBy('timestamp')
-    .limit(20);
-
-  bookCollection
-    .get()
-    .then((querySnapshot) => {
-      let booksArray = [];
-      querySnapshot.forEach((doc) => {
-        booksArray.push(doc);
+    .limit(100);
+  if (userId) {
+    database
+      .collection('userBookRecomandation')
+      .doc(userId)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          // setBooksList([]);
+          doc.data().arrayExample.map((bookId) => {
+            database
+              .collection('books')
+              .doc(bookId)
+              .get()
+              .then((doc) => {
+                setBooksList((prevBooksArray) => {
+                  return [...prevBooksArray, doc];
+                });
+              });
+          });
+        } else {
+          bookCollection
+            .get()
+            .then((querySnapshot) => {
+              let booksArray = [];
+              querySnapshot.forEach((doc) => {
+                booksArray.push(doc);
+              });
+              setBooksList(booksArray);
+            })
+            .catch((error) => {
+              console.log('Error getting documents: ', error);
+            });
+        }
       });
-      setBooksList(booksArray);
-    })
-    .catch((error) => {
-      console.log('Error getting documents: ', error);
-    });
+  } else {
+    bookCollection
+      .get()
+      .then((querySnapshot) => {
+        let booksArray = [];
+        querySnapshot.forEach((doc) => {
+          booksArray.push(doc);
+        });
+        setBooksList(booksArray);
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error);
+      });
+  }
 };
 export const getBook = (id, setBook) => {
   database
@@ -191,6 +226,20 @@ export const addBooksToBooksTest = () => {
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         database.collection('booksTest').doc(doc.id).set(doc.data());
+      });
+    });
+};
+export const repairAllBooksFeedback = () => {
+  database
+    .collection('books')
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({
+          rating: Number(doc.data().rating),
+          ratingCount: Number(doc.data().ratingCount),
+        });
+        console.log(doc.data().title);
       });
     });
 };
