@@ -69,24 +69,58 @@ function App() {
       />
     );
   };
+  const PublicRoute = ({ children, ...rest }) => {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          authStore.userData.email !== 'administrator@yahoo.com' ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/admin/orders',
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
   return (
     <Router>
       <Switch>
-        <Route path="/collection" component={Collection} exact={false}></Route>
-        <Route path="/aboutus" component={AboutUs} exact={true}></Route>
-        <Route path="/faq/:subpage" component={Faq}></Route>
-        <Route path="/faq" component={Faq}></Route>
-        <Route path="/contact" component={Contact} exact={true}></Route>
+        <PublicRoute path="/collection" exact={false}>
+          <Collection />
+        </PublicRoute>
+        <PublicRoute path="/aboutus" exact={true}>
+          <AboutUs />
+        </PublicRoute>
+        <PublicRoute path="/faq/:subpage">
+          <Faq />
+        </PublicRoute>
+        <PublicRoute path="/faq">
+          <Faq />
+        </PublicRoute>
+        <PublicRoute path="/contact" exact={true}>
+          <Contact />
+        </PublicRoute>
         <PrivateRoute path="/account/:subpage">
           <Account />
         </PrivateRoute>
         <PrivateAdminRoute path="/admin/:subpage">
           <Admin />
         </PrivateAdminRoute>
-        <Route path="/messages" component={Messages} exact={true}></Route>
-        <Route path="/collection" component={Collection}></Route>
-        <Route path="/book/:id" component={Book}></Route>
-        <Route path="/" component={Home} exact={true}></Route>
+        <PrivateAdminRoute path="/messages" exact={true}>
+          <Messages />
+        </PrivateAdminRoute>
+        <PublicRoute path="/book/:id">
+          <Book />
+        </PublicRoute>
+        <PublicRoute path="/" exact={true}>
+          <Home />
+        </PublicRoute>
         <Route path="*" component={Page404}></Route>
       </Switch>
     </Router>

@@ -39,7 +39,12 @@ const AccountWishlist = ({ userAccountData }) => {
             <img src={book.thumbnail} alt={book.title} className={image} />
             <div className={buttonsContainer}>
               <Link to={`/book/${book.id}`}>
-                <Button label="Borrow" className={button} />
+                <Button
+                  label="Borrow"
+                  className={button}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
               </Link>
               <MdOutlineDelete
                 className={icon}

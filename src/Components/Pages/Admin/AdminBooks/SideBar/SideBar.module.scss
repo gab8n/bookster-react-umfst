@@ -1,0 +1,40 @@
+.container {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5em 0;
+  border-right: solid 2px #958ada;
+
+  .filterContainer {
+    display: flex;
+    flex-direction: column;
+    .filterSpan {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .input {
+      border: 2px solid #958adaa2;
+    }
+  }
+  .addBookContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #958ada;
+    border-radius: 13px;
+    padding: 0.5em;
+    cursor: pointer;
+    .addBookText {
+      font-size: 1em;
+      margin-right: 0.5em;
+    }
+    .addBookIcon {
+      font-size: 2em;
+    }
+    &:hover {
+      background-color: #958adaa2;
+    }
+  }
+}

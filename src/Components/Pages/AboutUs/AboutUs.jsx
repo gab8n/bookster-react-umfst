@@ -14,8 +14,9 @@ const AboutUs = () => {
       <div className={subheader}>
         <AboutUsIntro />
         <AboutUsCounter />
+        <RoadToKnowledge />
       </div>
-      <RoadToKnowledge />
+
       <Footer />
     </div>
   );

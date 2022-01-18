@@ -95,14 +95,16 @@
             left: 0;
             top: 0;
             height: 100%;
-            //   width: 7%;
-            //   font-size: 200%;
+
             font-size: 1.5em;
             border-bottom-left-radius: 13px;
             border-top-left-radius: 13px;
             margin-right: 50%;
             padding: 0 5%;
             color: #958ada;
+          }
+          .wishlistButtonAdormentActive {
+            color: red;
           }
         }
         .ratingContainer {

@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   .subheader {
-    height: 150vh;
+    height: 120vh;
     width: 100%;
     background: rgb(82, 200, 181);
     background: linear-gradient(
@@ -17,5 +17,7 @@
     border-bottom: 20px solid #2f4858;
     display: flex;
     padding-top: 7%;
+    position: relative;
+    margin-bottom: 20em;
   }
 }

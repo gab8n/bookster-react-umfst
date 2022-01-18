@@ -12,7 +12,7 @@ import {
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-const BorrowModal = ({ bookId }) => {
+const BorrowModal = ({ bookId, toggleModal }) => {
   const userData = useSelector((state) => state.authStore.userData);
   const {
     modalContent,
@@ -37,9 +37,11 @@ const BorrowModal = ({ bookId }) => {
   });
   const handleError = (error) => {
     toast.error(error);
+    toggleModal();
   };
   const handleSuccess = (message) => {
     toast.success(message);
+    toggleModal();
   };
   const handleSubmit = (e) => {
     e.preventDefault();

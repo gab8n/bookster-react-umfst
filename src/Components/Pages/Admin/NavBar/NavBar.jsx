@@ -27,9 +27,6 @@ const NavBar = () => {
         <h1>Admin Panel</h1>
       </div>
       <div className={navContainer}>
-        <Link to="/admin/users" className={link}>
-          Users
-        </Link>
         <Link to="/admin/books" className={link}>
           Books
         </Link>

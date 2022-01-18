@@ -52,7 +52,7 @@ const SideNavigationBar = ({ photoURL, currentTab }) => {
             textButton={textButton}
           />
         </Link>
-        <Link to="/account/security">
+        {/* <Link to="/account/security">
           <Button
             className={
               currentTab === 'security' ? `${button} ${activeTab}` : button
@@ -61,7 +61,7 @@ const SideNavigationBar = ({ photoURL, currentTab }) => {
             startAdorment={<MdOutlineSecurity className={adorment} />}
             textButton={textButton}
           />
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

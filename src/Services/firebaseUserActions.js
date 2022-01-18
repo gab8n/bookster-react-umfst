@@ -125,10 +125,7 @@ export const createBorrowRequest = (
             ...userInfo,
           })
           .then(() => {
-            database
-              .collection('books')
-              .doc(bookId)
-              .update({ available: false });
+            database.collection('books').doc(bookId).update({ aviable: false });
             handleSuccess('Your request has been sent');
             //aici ar trebui sa trimita un email cu detaliile
             axios

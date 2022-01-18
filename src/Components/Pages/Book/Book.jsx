@@ -5,6 +5,7 @@ import { getBook } from 'Services/firebaseBooks';
 import { useState, useEffect } from 'react';
 import Button from 'Components/Common/Button/Button';
 import { FaHeart, PFaHeart, FaShoppingCart, FaRegHeart } from 'react-icons/fa';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import FeedbackStars from 'Components/Common/FeedbackStars/FeedbackStars';
 import {
@@ -39,6 +40,7 @@ const Book = () => {
     bookGenres,
     ratingContainer,
     bookDataContainer,
+    wishlistButtonAdormentActive,
   } = styles;
 
   const { id } = useParams();
@@ -130,7 +132,13 @@ const Book = () => {
                 className={wishlistButton}
                 label={'WHISHIST'}
                 startAdorment={
-                  <FaRegHeart className={wishlistButtonAdorment} />
+                  isInWishlist ? (
+                    <AiFillHeart
+                      className={`${wishlistButtonAdorment} ${wishlistButtonAdormentActive}`}
+                    />
+                  ) : (
+                    <FaRegHeart className={wishlistButtonAdorment} />
+                  )
                 }
                 onClick={() =>
                   isInWishlist

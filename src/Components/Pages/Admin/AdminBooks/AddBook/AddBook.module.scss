@@ -1,0 +1,82 @@
+@import 'lib/mixins.scss';
+.container {
+  width: 100%;
+  height: calc(100vh - 4.6em);
+  display: flex;
+  flex-direction: column;
+  background-color: #958ada33;
+
+  .cancelButtonContainer {
+    width: calc(100% - 2em);
+    padding: 1em;
+  }
+
+  .form {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    padding: 0 4em;
+    justify-content: space-evenly;
+    width: calc(100% - 8em);
+    .leftSideContainer {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      .input {
+        margin-bottom: 0.5em;
+      }
+      .twoInputsContainer {
+        display: flex;
+        justify-content: space-between;
+        .input {
+          width: 40%;
+        }
+      }
+    }
+    .rightSideContainer {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      .imageUploadContainer {
+        margin-top: 3em;
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 2em;
+        .coverPhoto {
+          height: 20em;
+          width: 15em;
+        }
+      }
+    }
+    .textarea {
+      padding: 0.8em 1.3em;
+      border-radius: 13px;
+      border: none;
+      @include shadowMixin($shadowForInput);
+      font-size: 1em;
+      font-weight: bold;
+
+      resize: none;
+      outline: none;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+  }
+}
+.uploadButton {
+  border-radius: 13px;
+  font-weight: bold;
+  background-color: #303030;
+  color: white;
+  padding: 20px 24px;
+  cursor: pointer;
+  align-self: center;
+  font-size: 18px;
+  &:hover {
+    background-color: #303030da;
+  }
+  * {
+    display: none;
+  }
+}
