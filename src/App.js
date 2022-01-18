@@ -112,9 +112,9 @@ function App() {
         <PrivateAdminRoute path="/admin/:subpage">
           <Admin />
         </PrivateAdminRoute>
-        <PrivateAdminRoute path="/messages" exact={true}>
+        <PrivateRoute path="/messages" exact={true}>
           <Messages />
-        </PrivateAdminRoute>
+        </PrivateRoute>
         <PublicRoute path="/book/:id">
           <Book />
         </PublicRoute>

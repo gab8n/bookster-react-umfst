@@ -11,6 +11,7 @@ import { useState, useEffect, useRef } from 'react';
 import MessageLabel from './MessageLabel/MessageLabel';
 
 import { encryptString, decryptString } from 'utils/RSAEncryption';
+import { toast } from 'react-toastify';
 
 const MessagesChat = ({ userData, talkingContact, socket }) => {
   const [messages, setMessages] = useState([]);
@@ -115,9 +116,14 @@ const MessagesChat = ({ userData, talkingContact, socket }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newMessage.trim() !== '') {
-      handleSendMessage(newMessage.trim());
+    if (talkingContact) {
+      if (newMessage.trim() !== '') {
+        handleSendMessage(newMessage.trim());
 
+        setNewMessage('');
+      }
+    } else {
+      toast.error('Please select a contact to start conversation');
       setNewMessage('');
     }
   };
@@ -139,20 +145,22 @@ const MessagesChat = ({ userData, talkingContact, socket }) => {
   return (
     <div className={container}>
       <div className={headerContainer}>
-        <div className={headerProfilePictureContainer}>
-          <img
-            className={headerProfilePicture}
-            src={contactData.photoURL}
-            alt="profile"
-          />
-          <div
-            className={
-              online
-                ? `${statusDott} ${onlineStatus}`
-                : `${statusDott} ${offlineStatus}`
-            }
-          ></div>
-        </div>
+        {talkingContact && (
+          <div className={headerProfilePictureContainer}>
+            <img
+              className={headerProfilePicture}
+              src={contactData.photoURL}
+              alt="profile"
+            />
+            <div
+              className={
+                online
+                  ? `${statusDott} ${onlineStatus}`
+                  : `${statusDott} ${offlineStatus}`
+              }
+            ></div>
+          </div>
+        )}
         <div className={headerContactName}>{contactData.displayName}</div>
       </div>
       <div className={bodyContainer}>
